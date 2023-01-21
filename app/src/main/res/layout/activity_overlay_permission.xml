@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingPage.OverlayPermissionActivity">
+
+    <TextView
+        android:id="@+id/textHome"
+        style="@style/TextViewStyle.BannerMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Permission to display over call"
+        android:textSize="18sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgOverlay"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/twelve"
+        android:src="@drawable/overlay_ring"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHome" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardOverlay"
+        android:clickable="true"
+        android:padding="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightGrey"
+        android:layout_marginHorizontal="@dimen/twelve"
+        app:cardCornerRadius="@dimen/twelve"
+        app:layout_constraintTop_toBottomOf="@+id/imgOverlay"
+        android:layout_marginTop="@dimen/twenty_four">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/eight">
+
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+
+                android:id="@+id/tvOvelayInfo"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_marginTop="@dimen/twelve"
+                android:gravity="center|center_vertical"
+                android:src="@drawable/circular_exclaimlayer"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+
+            <TextView
+                android:id="@+id/txtDisplayOverApp"
+                android:layout_width="match_parent"
+                style="@style/TextViewStyle.BannerLarge"
+                android:text="Display over apps"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Required for PolicyBoss Pro Caller to display caller ID on the screen."
+                android:layout_marginLeft="@dimen/eight"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"
+                app:layout_constraintTop_toBottomOf="@+id/txtDisplayOverApp" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardBackground"
+        android:clickable="true"
+        android:padding="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/lightGrey"
+        android:layout_marginHorizontal="@dimen/twelve"
+        app:cardCornerRadius="@dimen/twelve"
+        app:layout_constraintTop_toBottomOf="@+id/cardOverlay"
+        android:layout_marginTop="@dimen/twenty_four">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/eight">
+
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+
+                android:id="@+id/tvBackgroundInfo"
+
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+
+                android:layout_marginTop="@dimen/twelve"
+                android:gravity="center|center_vertical"
+                android:src="@drawable/circular_exclaimlayer"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+
+            <TextView
+                android:id="@+id/txtDisplayBackground"
+                android:layout_width="match_parent"
+                style="@style/TextViewStyle.BannerLarge"
+                android:text="Run in background"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvBackgroundInfo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textBackgroundDescp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Required for PolicyBoss Pro Caller to run in the background."
+                android:layout_marginLeft="@dimen/eight"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvBackgroundInfo"
+                app:layout_constraintTop_toBottomOf="@+id/txtDisplayBackground" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/btnAllowOverlay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/eight"
+
+        android:background="@drawable/round_rect_shape"
+        android:padding="@dimen/four"
+        android:text="ALLOW"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        android:layout_marginBottom="@dimen/eight"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btnCancel"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/twelve"
+        android:text="NOT NOW"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:padding="@dimen/twelve"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

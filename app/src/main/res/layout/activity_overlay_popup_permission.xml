@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/lyParent"
+    tools:context=".popup.OverlayPopupPermissionActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></View>
+
+    <LinearLayout
+        android:id="@+id/lyOverlay"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/lightTransparentBlue"
+        >
+        <LinearLayout
+            android:padding="@dimen/fourteen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:fontFamily="@font/ibmplexsansmedium"
+                android:text="Enable 'Draw over other apps'\nPolicyBoss Pro Caller will display every calls info for you. "
+                />
+
+            <LinearLayout
+
+                android:layout_marginTop="@dimen/twelve"
+                android:layout_marginBottom="@dimen/twelve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/twelve"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:textColor="@color/secondary_text_color"
+                        android:fontFamily="@font/ibmplexsansmedium"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-15dp"
+                        android:textSize="15sp"
+                        android:text="draw over other apps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <pl.droidsonroids.gif.GifImageView
+                        android:background="@null"
+                        android:src="@drawable/toggle_swipe"
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyBackground"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/lightTransparentBlue"
+        >
+        <LinearLayout
+            android:padding="@dimen/fourteen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="16sp"
+                android:fontFamily="@font/ibmplexsansmedium"
+                android:text="Select 'No restrictions'\nPolicyBoss Pro Caller allow to run in background. "
+                />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/twelve"
+                android:layout_marginBottom="@dimen/twelve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="@color/white"
+
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/check_gif"
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"/>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/four"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:background="@null"
+
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/ibmplexsansmedium"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="15dp"
+                            android:textSize="18sp"
+
+                            android:text="No restrictions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:background="@null"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/ibmplexsansmedium"
+                            android:text="Battery saver doesn't restrict app's activity"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
