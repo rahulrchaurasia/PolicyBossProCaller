@@ -202,6 +202,22 @@ class CustomWIndow(context: Context) {
 
         }
 
+        fun verifyExsist(context: Context){
+
+            try{
+
+                if ((context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager) != null) {
+
+                    (context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager).removeView(mView)
+
+                    // invalidate the view
+                    mView!!.invalidate()
+                }
+            }catch (ex :Exception){
+
+            }
+
+        }
 
         fun close(context: Context ) {
             try {

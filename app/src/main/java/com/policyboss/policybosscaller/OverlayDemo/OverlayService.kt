@@ -158,15 +158,14 @@ class OverlayService : Service()  {
                             createNotificationChannel()
                             showForeGroundNotification(callType, phoneNumber)
 
-                            // Normal Notification
-                          // NotifyService(mcontext = context!!,callType = callType, phoneNumber = phoneNumber).callNotification()
                         } else {
-                            // Note : Below Oreo we show Normal Notification to user
-                          //  NotifyService(mcontext = context!!,callType = callType, phoneNumber = phoneNumber).callNotification()
+
+
                         }
 
                         ApplicationPersistance(context!!).savePhoneCallType(callType,phoneNumber)
 
+                        CustomWIndow.verifyExsist(this.applicationContext)
                         Handler(Looper.getMainLooper()).postDelayed({
 
                             CustomWIndow.openWindowPopUp(
@@ -211,7 +210,7 @@ class OverlayService : Service()  {
 //                                context!!.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
 
-                            stopSelf()      // Forground Service is closed
+                           // stopSelf()      // Forground Service is closed
 
                         }, 400)
 
@@ -254,9 +253,10 @@ class OverlayService : Service()  {
             0, notificationIntent, flag
         )
 
+        //.setContentText("${callType}: ${phoneNumber}")
+
         val notification = NotificationCompat.Builder(this, Constant.CHANNEL_ID)
             .setContentTitle("PolicyBoss Pro Caller is Enable")
-            .setContentText("${callType}: ${phoneNumber}")
             .setSmallIcon(R.drawable.ic_call_24)
             .setContentIntent(pendingIntent)
            // .setFullScreenIntent(pendingIntent,true)

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.BaseActivity
 import com.policyboss.policybosscaller.Home.HomeActivity
+import com.policyboss.policybosscaller.OverlayDemo.LoginActivity
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.databinding.ActivityOverlayPermissionBinding
 import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
@@ -58,20 +59,11 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
            binding.btnAllowOverlay.id-> {
 
-                if(!isOverlayPermissionExist()){
+                    this.finish()
 
-                    showOverlayPermission()
-                    Handler(Looper.myLooper()!!).postDelayed({
+                    startActivity(Intent(this, LoginActivity::class.java))
 
-                        startActivity(Intent(this, OverlayPopupPermissionActivity::class.java))
 
-                    },200)
-
-                }else{
-
-                    startActivity(Intent(this, HomeActivity::class.java))
-
-                }
             }
         }
     }

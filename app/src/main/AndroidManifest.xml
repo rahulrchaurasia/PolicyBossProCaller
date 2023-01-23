@@ -51,28 +51,42 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".OverlayDemo.LoginActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".test.TestActivity"
+            android:exported="false"
+            android:label="@string/title_activity_test"
+            android:theme="@style/Theme.PolicyBossCaller.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".WebView.CommonWebViewActivity"
             android:exported="false"
             android:parentActivityName=".Home.HomeActivity"
             android:screenOrientation="portrait">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".popup.PopUpAfterCallEndActivity"
+            android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleTop"
             android:noHistory="true"
-            android:excludeFromRecents="true"
             android:showOnLockScreen="true"
             android:theme="@style/Theme.AppCompat.TranslucentDark">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".popup.OverlayPopupPermissionActivity"
             android:exported="false"
@@ -138,7 +152,6 @@
             <!-- <action android:name="android.intent.action.NEW_OUTGOING_CALL" /> -->
             <!-- </intent-filter> -->
         </receiver>
-
 
         <service
             android:name=".OverlayDemo.OverlayService"

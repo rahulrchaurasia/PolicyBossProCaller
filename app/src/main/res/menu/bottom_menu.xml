@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home" android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"/>
+    <item android:title="Profile"  android:id="@+id/contactFragment"
+        android:icon="@drawable/ic_person"/>
+    <item android:title="Setting" android:id="@+id/settingFragment"
+        android:icon="@drawable/ic_settings"/>
+</menu>
