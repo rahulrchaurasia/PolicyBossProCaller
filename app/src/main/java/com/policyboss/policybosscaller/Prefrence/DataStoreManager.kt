@@ -2,31 +2,100 @@ package com.example.policybosscaller.Prefrence
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+
+
 import com.example.policybosscaller.Utility.Constant
+import kotlinx.coroutines.flow.*
 
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.firstOrNull
+class DataStoreManager constructor (val context: Context){
 
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.map
-
-class DataStoreManager (val context: Context){
-
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "DATASTORE")
 
     companion object {
+
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "POLICYBOSS_CALLER_DATASTORE")
+
 
         val LastState = intPreferencesKey(Constant.LastState)
         val IsInComingCall = booleanPreferencesKey(Constant.IsInComingCall)
 
+        val FBAData = stringPreferencesKey("FBADATA")
+        val SSIDData = stringPreferencesKey("SSIDData")
+        val PARENTDATA = stringPreferencesKey("PARENTID")
+
+       // val LoginData= stringPreferencesKey(Constant.loginData)
 
     }
+
+    suspend fun saveLoginData(fbaId : String,ssId : String, parentId : String ) {
+        context.dataStore.edit { preferences ->
+            preferences[FBAData] = fbaId
+            preferences[SSIDData] = ssId
+            preferences[PARENTDATA] = parentId
+
+        }
+    }
+    suspend fun getFBAID(): Flow<String> =
+
+//        context.dataStore.data.catch {
+//
+//            if(this is Exception){
+//                emit(emptyPreferences())
+//            }
+//        }.map { preferences ->
+//           preferences[FBAData] ?: "0"
+//
+//        }
+
+        context.dataStore.data.map { it[FBAData]?: "0" }
+    //2
+
+    suspend fun saveSSId(ssId : String ) {
+        context.dataStore.edit { preferences ->
+            preferences[SSIDData] = ssId
+
+        }
+    }
+    fun getSSID(): Flow<String> =
+
+        context.dataStore.data.catch {
+
+            if(this is Exception){
+                emit(emptyPreferences())
+            }
+        }.map { preferences ->
+            preferences[SSIDData] ?: "0"
+
+        }
+
+    //3
+
+    suspend fun saveParentID(parentId : String ) {
+        context.dataStore.edit { preferences ->
+            preferences[PARENTDATA] = parentId
+
+        }
+    }
+    fun getParentID(): Flow<String> =
+
+        context.dataStore.data.catch {
+
+            if(this is Exception){
+                emit(emptyPreferences())
+            }
+        }.map { preferences ->
+            preferences[PARENTDATA] ?: "0"
+
+        }
+
+//    suspend fun updateSortOrder(loginEntity : LoginEntity ) {
+//        context.dataStore.edit { preferences ->
+//            preferences[Constant.loginData] = loginEntity
+//        }
+//    }
+
 
     suspend fun saveLastState(lastState : Int ) {
         context.dataStore.edit {

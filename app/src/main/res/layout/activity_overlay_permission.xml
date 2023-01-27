@@ -77,7 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/txtOverlayDtls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Required for PolicyBoss Pro Caller to display caller ID on the screen."
@@ -86,6 +86,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"
                 app:layout_constraintTop_toBottomOf="@+id/txtDisplayOverApp" />
+
+            <TextView
+                android:id="@+id/txtAllowOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:text="ALLOW"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:padding="@dimen/twelve"
+                app:layout_constraintTop_toBottomOf="@+id/txtOverlayDtls"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo" />
+
+
 
 
 
@@ -151,6 +166,19 @@
                 app:layout_constraintStart_toEndOf="@+id/tvBackgroundInfo"
                 app:layout_constraintTop_toBottomOf="@+id/txtDisplayBackground" />
 
+            <TextView
+                android:id="@+id/txtAllowbackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:text="ALLOW"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:padding="@dimen/twelve"
+                app:layout_constraintTop_toBottomOf="@+id/textBackgroundDescp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvBackgroundInfo" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -163,10 +191,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/eight"
-
+         android:visibility="gone"
         android:background="@drawable/round_rect_shape"
         android:padding="@dimen/four"
-        android:text="ALLOW"
+        android:text="ALLOW ALL"
         android:textColor="@color/blue"
         android:textSize="16sp"
         android:layout_marginBottom="@dimen/eight"

@@ -8,11 +8,13 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.PowerManager
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Base64
 import android.util.Base64.encodeToString
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.policybosscaller.BuildConfig
@@ -42,6 +44,26 @@ object Utility {
         }
 
     }
+
+    fun isBackgroundPermissionExist(context: Context) : Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            val packageName = context.packageName
+            val pm = context.getSystemService(AppCompatActivity.POWER_SERVICE) as PowerManager
+            if (pm.isIgnoringBatteryOptimizations(packageName)) {
+
+                return true
+            }else{
+
+                return false
+            }
+        }else{
+
+            return true
+        }
+
+    }
+
 
     fun uriFromFile(context: Context, file: File): Uri {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)

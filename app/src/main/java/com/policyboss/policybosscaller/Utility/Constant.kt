@@ -44,10 +44,12 @@ object Constant {
 
     const val CALL_TYPE = "calltype"
     const val MissedCall = "Missed Call"
-    const val EndCall = "End Call"
+    const val EndCall = "Call Ended"
     const val Phone_NUMBER = "phoneNumber"
 
     var SHARED_PREF = "policyBossCallerPrefrence"
+
+    const val loginData = "loginData"
 
     const val LastState = "LastState"
     const val IsInComingCall = "IsInComingCall"

@@ -206,11 +206,8 @@ class OverlayService : Service()  {
 
                             )
 
-//                            val activityManager =
-//                                context!!.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
-
-                           // stopSelf()      // Forground Service is closed
+                            stopSelf()      // Forground Service is closed
 
                         }, 400)
 

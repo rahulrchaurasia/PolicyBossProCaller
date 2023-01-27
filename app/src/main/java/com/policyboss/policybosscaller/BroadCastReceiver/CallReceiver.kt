@@ -6,24 +6,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Handler
-import android.os.Looper
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.lifecycleScope
 import com.example.policybosscaller.OverlayDemo.CallType
-import com.example.policybosscaller.OverlayDemo.WindowOverlay
 import com.example.policybosscaller.Prefrence.ApplicationPersistance
-import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NotifyService
 import com.policyboss.policybosscaller.OverlayDemo.OverlayService
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.catch
-import java.lang.Runnable
 import java.util.*
 
 //https://stackoverflow.com/questions/5990590/how-to-detect-phone-call-broadcast-receiver-in-android
@@ -107,6 +100,7 @@ class CallReceiver  : BroadcastReceiver() {
 
 
     //Derived classes should override these to respond to specific events of interest
+
     protected fun onIncomingCallStarted(context: Context,phoneNumber : String?) {
 
 
@@ -128,6 +122,13 @@ class CallReceiver  : BroadcastReceiver() {
         OverlayService.startService(context = OverlayService.getServiceContext(context),callType = CallType.OUTGOING , phoneNumber = savedNumber )
 
     }
+
+    protected  fun onIncomingCallAnswered(context: Context,phoneNumber : String?){
+
+        Log.d(Constant.TAG,"onCallAnswered"+ phoneNumber)
+        OverlayService.stopService()
+    }
+
     protected fun onIncomingCallEnded(context: Context, phoneNumber : String?) {
 
 
@@ -165,7 +166,7 @@ class CallReceiver  : BroadcastReceiver() {
             TelephonyManager.CALL_STATE_RINGING -> {
                 //isInComingCall = true
                 ApplicationPersistance(context!!).saveIsCallInComming(true)
-                callStartTime = Date()
+                //callStartTime = Date()
 
                 onIncomingCallStarted(context!!, savedNumber)
             }
@@ -173,8 +174,15 @@ class CallReceiver  : BroadcastReceiver() {
                 if (lastState != TelephonyManager.CALL_STATE_RINGING) {
                    // isInComingCall = false
                     ApplicationPersistance(context!!).saveIsCallInComming(false)
-                    callStartTime = Date()
-                    onOutgoingCallStarted(context!!, savedNumber, )
+                    //callStartTime = Date()
+                    onOutgoingCallStarted(context!!, savedNumber)
+                }
+                else
+                {
+
+                     //callStartTime =  Date();
+                    onIncomingCallAnswered(context, savedNumber);
+                    ApplicationPersistance(context!!).saveIsCallInComming(false)
                 }
             TelephonyManager.CALL_STATE_IDLE ->                 //Went to idle-  this is the end of a call.  What type depends on previous state(s)
                 if (lastState == TelephonyManager.CALL_STATE_RINGING) {

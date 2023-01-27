@@ -1,18 +1,19 @@
 package com.policyboss.policybosscaller.SettingPage
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.*
 import android.provider.Settings
 import android.view.View
-import androidx.core.app.ActivityCompat
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.policybosscaller.Utility.Constant
+import com.example.policybosscaller.Utility.showSnackbar
+import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.BaseActivity
 import com.policyboss.policybosscaller.Home.HomeActivity
-import com.policyboss.policybosscaller.OverlayDemo.LoginActivity
+import com.policyboss.policybosscaller.login.LoginActivity
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.databinding.ActivityOverlayPermissionBinding
 import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
@@ -20,17 +21,87 @@ import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
 
 class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
     private lateinit var binding : com.policyboss.policybosscaller.databinding.ActivityOverlayPermissionBinding
-
+    lateinit var layout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityOverlayPermissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        layout = binding.root
         binding.cardOverlay.setOnClickListener(this)
         binding.cardBackground.setOnClickListener(this)
-        binding.btnAllowOverlay.setOnClickListener(this)
+       // binding.btnAllowOverlay.setOnClickListener(this)
+
+        verifyOverlayAndBackgroundPermission()
+
+
+    }
+
+    ////
+
+    private  val overlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+
+        if(isOverlayPermissionExist()){
+
+            if(isBackgroundPermissionExist()){
+
+                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
+                this@OverlayPermissionActivity.finish()
+            }else{
+                updateUI()
+            }
+
+
+
+        }else{
+            layout.showSnackbar(
+                R.string.permission_overlay_required,
+                Snackbar.LENGTH_LONG,
+                R.string.ok
+            )
+            {
+
+                backGroundBatteryOptimization()
+            }
+        }
+
+
+    }
+
+    private  val backgroundLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+
+        if(result.resultCode ==  RESULT_OK) {
+
+            //startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
+
+            if(isOverlayPermissionExist()){
+
+                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
+                this@OverlayPermissionActivity.finish()
+            }else{
+                updateBackGroundUI()
+            }
+
+
+
+        }else{
+
+           // binding.root.showSnackbar("Required background permission to execute perfectly when app is in background")
+
+            layout.showSnackbar(
+                R.string.permission_background_required,
+                Snackbar.LENGTH_LONG,
+                R.string.ok
+            )
+            {
+
+                backGroundBatteryOptimization()
+            }
+
+        }
+
+
 
     }
 
@@ -57,28 +128,25 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
                 backGroundBatteryOptimization()
             }
 
-           binding.btnAllowOverlay.id-> {
 
-                    this.finish()
-
-                    startActivity(Intent(this, LoginActivity::class.java))
-
-
-            }
         }
     }
 
     override fun onResume() {
         super.onResume()
+
+
+    }
+
+    fun verifyOverlayAndBackgroundPermission(){
+
+        if(isOverlayPermissionExist()){
+
+            updateUI()
+        }
         if(isBackgroundPermissionExist()){
             updateBackGroundUI()
         }
-        if(isOverlayPermissionExist()){
-            updateUI()
-        }
-
-
-
     }
 
     fun updateUI(){
@@ -87,14 +155,15 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
 
 
-            binding.btnAllowOverlay.background = ContextCompat.getDrawable(this@OverlayPermissionActivity, R.drawable.round_rect_blue_shape)
-
-            binding.btnAllowOverlay.setTextColor(ContextCompat.getColor(this@OverlayPermissionActivity, R.color.white))
-            binding.btnAllowOverlay.text = "CONTINUE"
-            binding.btnAllowOverlay.textSize = 16f
+//            binding.btnAllowOverlay.background = ContextCompat.getDrawable(this@OverlayPermissionActivity, R.drawable.round_rect_blue_shape)
+//
+//            binding.btnAllowOverlay.setTextColor(ContextCompat.getColor(this@OverlayPermissionActivity, R.color.white))
+//            binding.btnAllowOverlay.text = "CONTINUE"
+//            binding.btnAllowOverlay.textSize = 16f
 
 
             binding.tvOvelayInfo.setImageResource(R.drawable.circular_checklayer)
+            binding.txtAllowOverlay.text = "ALLOWED"
 
         },400)
 
@@ -109,6 +178,7 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
         Handler(Looper.myLooper()!!).postDelayed({
 
             binding.tvBackgroundInfo.setImageResource(R.drawable.circular_checklayer)
+            binding.txtAllowbackground.text = "ALLOWED"
         },400)
 
       //  binding.btnCancel.visibility = View.GONE
@@ -117,20 +187,23 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
     }
 
+
+
     //region method to ask user to grant the Overlay permission
     fun showOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 // send user to the device settings
                 val myIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                startActivity(myIntent)
+                overlayLauncher.launch(myIntent)
+               // startActivity(myIntent)
             }
         }
     }
 
     fun isOverlayPermissionExist() : Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Settings.canDrawOverlays(this)) {
+            if (Settings.canDrawOverlays(this.applicationContext)) {
 
                 return true
             }else{
@@ -173,7 +246,8 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
             if (!pm.isIgnoringBatteryOptimizations(packageName)) {
                 intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                 intent.data = Uri.parse("package:$packageName")
-                startActivity(intent)
+               // startActivity(intent)
+               backgroundLauncher.launch(intent)
                      Handler(Looper.myLooper()!!).postDelayed({
                          startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
                              .putExtra(Constant.IS_OVERLAYSCREEN,Constant.BACKGROUND_DATA))

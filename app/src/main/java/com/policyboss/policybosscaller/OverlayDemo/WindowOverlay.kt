@@ -3,6 +3,7 @@ package com.example.policybosscaller.OverlayDemo
 import android.content.Context
 import android.content.Context.POWER_SERVICE
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.PowerManager
@@ -192,6 +193,7 @@ class WindowOverlay {
                 // inflated or present in the window
                 if (mView!!.windowToken == null) {
                     if (mView!!.parent == null) {
+                      //  mParams.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                         mWindowManager!!.addView(mView, mParams)
 
                     }

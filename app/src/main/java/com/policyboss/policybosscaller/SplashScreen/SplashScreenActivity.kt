@@ -13,6 +13,7 @@ import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.SettingPage.OverlayPermissionActivity
 import com.policyboss.policybosscaller.SettingPage.SettingActivity
 import com.policyboss.policybosscaller.databinding.ActivitySplashScreenBinding
+import com.policyboss.policybosscaller.login.LoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySplashScreenBinding
@@ -43,15 +44,15 @@ class SplashScreenActivity : AppCompatActivity() {
         if (hasReadPhonePermission() == PackageManager.PERMISSION_GRANTED
             && hasCallLogPermission() == PackageManager.PERMISSION_GRANTED){
 
-//            if(!Utility.isOverlayPermissionExist(this@SplashScreenActivity)) {
-//                startActivity(Intent(this, OverlayPermissionActivity::class.java))
-//            }
-//            else{
-//                startActivity(Intent(this, HomeActivity::class.java))
-//
-//            }
+            if(Utility.isOverlayPermissionExist(this@SplashScreenActivity) &&
+                Utility.isBackgroundPermissionExist(this@SplashScreenActivity)){
 
-            startActivity(Intent(this, OverlayPermissionActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
+            }else{
+
+                startActivity(Intent(this, OverlayPermissionActivity::class.java))
+            }
+
 
         }else{
             startActivity(Intent(this, SettingActivity::class.java))

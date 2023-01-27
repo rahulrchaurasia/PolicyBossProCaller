@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +30,7 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
     private var isReadPhoneState = false
     private var isReadCallLog = false
     // lateinit var CallLogContracts : ActivityResultLauncher<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +100,8 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
 
         }
     }
+
+
 
     //endregion
 
@@ -211,11 +215,14 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
 
                 if (hasReadPhonePermission() == PackageManager.PERMISSION_GRANTED && hasCallLogPermission() == PackageManager.PERMISSION_GRANTED){
 
-                    if(!Utility.isOverlayPermissionExist(this@SettingActivity)) {
-                        startActivity(Intent(this, OverlayPermissionActivity::class.java))
-                    }else{
+
+                    if(Utility.isOverlayPermissionExist(this@SettingActivity) &&
+                        Utility.isBackgroundPermissionExist(this@SettingActivity)){
 
                         startActivity(Intent(this, HomeActivity::class.java))
+                    }else{
+
+                        startActivity(Intent(this, OverlayPermissionActivity::class.java))
                     }
 
 

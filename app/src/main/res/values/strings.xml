@@ -17,4 +17,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_test">TestActivity</string>
+
+    <string name="ok">OK</string>
+    <string name="permission_background_required">Required background permission to execute perfectly when app is in background</string>
+    <string name="permission_overlay_required">Required for PolicyBoss Pro Caller to display caller ID on the screen.</string>
 </resources>

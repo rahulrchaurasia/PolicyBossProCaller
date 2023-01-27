@@ -25,6 +25,7 @@
         android:name="android.permission.READ_PHONE_STATE"
         tools:remove="android:maxSdkVersion" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+
     <uses-permission
         android:name="android.permission.MODIFY_PHONE_STATE"
         tools:ignore="ProtectedPermissions" /> <!-- &lt;!&ndash; Grants the READ_PHONE_STATE permission only on devices that run -->
@@ -51,7 +52,8 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
-            android:name=".OverlayDemo.LoginActivity"
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -60,6 +62,7 @@
         <activity
             android:name=".test.TestActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_test"
             android:theme="@style/Theme.PolicyBossCaller.NoActionBar">
             <meta-data
@@ -79,6 +82,7 @@
             android:name=".popup.PopUpAfterCallEndActivity"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:launchMode="singleTop"
             android:noHistory="true"
             android:showOnLockScreen="true"
@@ -90,6 +94,7 @@
         <activity
             android:name=".popup.OverlayPopupPermissionActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,6 +102,7 @@
         </activity>
         <activity
             android:name=".SettingPage.SettingActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -111,6 +117,7 @@
         </activity>
         <activity
             android:name=".SettingPage.OverlayPermissionActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -119,6 +126,7 @@
         <activity
             android:name=".Home.HomeActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.PolicyBossCaller">
             <meta-data
                 android:name="android.app.lib_name"
@@ -126,12 +134,12 @@
         </activity>
         <activity
             android:name=".SplashScreen.SplashScreenActivity"
-            android:excludeFromRecents="true"
+            android:excludeFromRecents="false"
+            android:noHistory="false"
             android:exported="true"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:showOnLockScreen="true"
-            android:taskAffinity=""
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
