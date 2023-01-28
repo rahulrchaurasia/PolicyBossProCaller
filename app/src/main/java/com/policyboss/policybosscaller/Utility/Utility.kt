@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.policybosscaller.BuildConfig
+import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -44,6 +46,8 @@ object Utility {
         }
 
     }
+
+
 
     fun isBackgroundPermissionExist(context: Context) : Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

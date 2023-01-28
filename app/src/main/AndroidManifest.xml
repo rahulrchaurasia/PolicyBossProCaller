@@ -26,6 +26,8 @@
         tools:remove="android:maxSdkVersion" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
 
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <uses-permission
         android:name="android.permission.MODIFY_PHONE_STATE"
         tools:ignore="ProtectedPermissions" /> <!-- &lt;!&ndash; Grants the READ_PHONE_STATE permission only on devices that run -->

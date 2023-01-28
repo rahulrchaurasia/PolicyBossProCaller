@@ -37,19 +37,19 @@ class DataStoreManager constructor (val context: Context){
 
         }
     }
-    suspend fun getFBAID(): Flow<String> =
+     fun getFBAID(): Flow<String> =
 
-//        context.dataStore.data.catch {
-//
-//            if(this is Exception){
-//                emit(emptyPreferences())
-//            }
-//        }.map { preferences ->
-//           preferences[FBAData] ?: "0"
-//
-//        }
+        context.dataStore.data.catch {
 
-        context.dataStore.data.map { it[FBAData]?: "0" }
+            if(this is Exception){
+                emit(emptyPreferences())
+            }
+        }.map { preferences ->
+           preferences[FBAData] ?: "0"
+
+        }
+
+        //context.dataStore.data.map { it[FBAData]?: "0" }
     //2
 
     suspend fun saveSSId(ssId : String ) {

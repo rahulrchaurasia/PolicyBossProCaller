@@ -71,12 +71,12 @@ class HomeActivity : BaseActivity() {
 
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                viewModel.getFBAID().collect{
-
-                    val fbaid = it
-                    Log.d(Constant.TAG ,"" + fbaid)
-
-                }
+//                viewModel.getFBAID().collect{
+//
+//                    val fbaid = it
+//                    Log.d(Constant.TAG ,"" + fbaid)
+//
+//                }
 
             }
         }
@@ -87,8 +87,8 @@ class HomeActivity : BaseActivity() {
 
 
       //  var loiginRepository = LoginRepository(this@HomeActivity, RetrofitHelper.retrofitLoginApi)
-        var viewModelFactory = HomeViewModelFactory(this@HomeActivity)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
+//        var viewModelFactory = HomeViewModelFactory(this@HomeActivity)
+//        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
 
 
     }

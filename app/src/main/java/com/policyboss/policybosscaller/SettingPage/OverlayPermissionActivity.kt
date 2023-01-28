@@ -8,6 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.showSnackbar
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +21,7 @@ import com.policyboss.policybosscaller.login.LoginActivity
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.databinding.ActivityOverlayPermissionBinding
 import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
+import kotlinx.coroutines.launch
 
 
 class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
@@ -77,8 +82,30 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
             if(isOverlayPermissionExist()){
 
-                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
-                this@OverlayPermissionActivity.finish()
+
+                lifecycleScope.launch {
+
+                    repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        DataStoreManager(this@OverlayPermissionActivity).getFBAID().collect{
+
+                            if(it.length> 0){
+                                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                this@OverlayPermissionActivity.finish()
+                            }else{
+                                startActivity(Intent(this@OverlayPermissionActivity, LoginActivity::class.java)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                this@OverlayPermissionActivity.finish()
+                            }
+
+                        }
+                    }
+                }
+
             }else{
                 updateBackGroundUI()
             }
@@ -114,12 +141,12 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
                 if(!isOverlayPermissionExist()){
 
                     showOverlayPermission()
-                    Handler(Looper.myLooper()!!).postDelayed({
+                    Handler(Looper.getMainLooper()!!).postDelayed({
 
                         startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
                             .putExtra(Constant.IS_OVERLAYSCREEN,Constant.OVERLAY_DATA))
 
-                    },200)
+                    },1200)
                 }
             }
 
@@ -248,11 +275,11 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
                 intent.data = Uri.parse("package:$packageName")
                // startActivity(intent)
                backgroundLauncher.launch(intent)
-                     Handler(Looper.myLooper()!!).postDelayed({
-                         startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
-                             .putExtra(Constant.IS_OVERLAYSCREEN,Constant.BACKGROUND_DATA))
-
-                     },200)
+//                     Handler(Looper.myLooper()!!).postDelayed({
+//                         startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
+//                             .putExtra(Constant.IS_OVERLAYSCREEN,Constant.BACKGROUND_DATA))
+//
+//                     },200)
             }else{
 
                updateBackGroundUI()

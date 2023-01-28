@@ -23,7 +23,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/imgProfile"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="@dimen/eight"
@@ -42,11 +42,11 @@
             android:layout_marginTop="@dimen/eight"
             android:text="Hi, ekckek cece"
             app:layout_constraintEnd_toStartOf="@+id/imgNotify"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+            app:layout_constraintStart_toEndOf="@+id/imgProfile"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fbaID"
+            android:id="@+id/txtfbaID"
             style="@style/TextViewStyle.body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,6 +55,17 @@
 
             app:layout_constraintStart_toStartOf="@+id/txtName"
             app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtpospNo"
+            style="@style/TextViewStyle.body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="Posp"
+
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/txtfbaID" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgNotify"

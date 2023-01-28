@@ -45,34 +45,6 @@ class LoginRepository (private val context : Context ,private val apiService : A
 
 
 
-    suspend fun getUserConstant(@Body body: HashMap<String, String>)  = flow {
-
-
-
-        val response = apiService.getConstant(body)
-
-
-        //region For Handling Database
-//        if(response.isSuccessful) {
-//
-//            if (response.body()?.StatusNo == 0) {
-//
-//                response.body()?.let {
-//                    // demoDatabase.loginDao().insertLoginData(it.MasterData)
-//
-//
-//                }
-//
-//            }
-//        }
-
-        // endregion
-
-        emit(response)
-
-    }.flowOn(Dispatchers.IO)
-
-
 
 
 

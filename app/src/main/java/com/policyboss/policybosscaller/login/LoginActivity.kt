@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.jetpackdemo.RetrofitHelper
-import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NetworkUtils
 import com.google.android.material.snackbar.Snackbar
@@ -135,7 +134,7 @@ class LoginActivity : BaseActivity() {
     private fun init(){
 
 
-        var loiginRepository = LoginRepository(this@LoginActivity,RetrofitHelper.retrofitLoginApi)
+        var loiginRepository = LoginRepository(this@LoginActivity,RetrofitHelper.retrofitCallerApi)
         var viewModelFactory = LoginViewModelFactory(loiginRepository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
 
