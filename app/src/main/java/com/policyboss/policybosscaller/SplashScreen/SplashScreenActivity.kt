@@ -20,7 +20,9 @@ import com.policyboss.policybosscaller.SettingPage.OverlayPermissionActivity
 import com.policyboss.policybosscaller.SettingPage.SettingActivity
 import com.policyboss.policybosscaller.databinding.ActivitySplashScreenBinding
 import com.policyboss.policybosscaller.login.LoginActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySplashScreenBinding
@@ -60,12 +62,15 @@ class SplashScreenActivity : AppCompatActivity() {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
                         DataStoreManager(this@SplashScreenActivity).getFBAID().collect{
 
-                            if(it.length> 0){
-                                startActivity(Intent(this@SplashScreenActivity, HomeActivity::class.java))
-                                this@SplashScreenActivity.finish()
-                            }else{
-                                startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
-                                this@SplashScreenActivity.finish()
+                            withContext(Dispatchers.Main){
+                                if(it.length> 0 && !it.equals("0")){
+                                    startActivity(Intent(this@SplashScreenActivity, HomeActivity::class.java))
+                                    this@SplashScreenActivity.finish()
+                                }else{
+                                    startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                                    this@SplashScreenActivity.finish()
+                                }
+
                             }
 
                         }

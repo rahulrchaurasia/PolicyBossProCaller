@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
+import com.example.policybosscaller.Utility.Utility
 import com.example.policybosscaller.Utility.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.BaseActivity
@@ -21,7 +22,9 @@ import com.policyboss.policybosscaller.login.LoginActivity
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.databinding.ActivityOverlayPermissionBinding
 import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
@@ -36,6 +39,7 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
         layout = binding.root
         binding.cardOverlay.setOnClickListener(this)
         binding.cardBackground.setOnClickListener(this)
+        binding.btnInfo.setOnClickListener(this)
        // binding.btnAllowOverlay.setOnClickListener(this)
 
         verifyOverlayAndBackgroundPermission()
@@ -88,18 +92,21 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
                         DataStoreManager(this@OverlayPermissionActivity).getFBAID().collect{
 
-                            if(it.length> 0){
-                                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                                this@OverlayPermissionActivity.finish()
-                            }else{
-                                startActivity(Intent(this@OverlayPermissionActivity, LoginActivity::class.java)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                                this@OverlayPermissionActivity.finish()
+                            withContext(Dispatchers.Main){
+                                if(it.length> 0 && !it.equals("0")){
+                                    startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                    this@OverlayPermissionActivity.finish()
+                                }else{
+                                    startActivity(Intent(this@OverlayPermissionActivity, LoginActivity::class.java)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                    this@OverlayPermissionActivity.finish()
+                                }
+
                             }
 
                         }
@@ -153,6 +160,13 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
             binding.cardBackground.id -> {
 
                 backGroundBatteryOptimization()
+            }
+
+            binding.btnInfo.id -> {
+
+               Utility.showCustom(this@OverlayPermissionActivity)
+
+
             }
 
 

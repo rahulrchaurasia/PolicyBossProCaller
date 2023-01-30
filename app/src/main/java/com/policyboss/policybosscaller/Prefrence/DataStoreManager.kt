@@ -29,6 +29,11 @@ class DataStoreManager constructor (val context: Context){
 
     }
 
+    suspend fun clearAll() {
+        context.dataStore.edit {
+            it.clear()
+        }
+    }
     suspend fun saveLoginData(fbaId : String,ssId : String, parentId : String ) {
         context.dataStore.edit { preferences ->
             preferences[FBAData] = fbaId
@@ -50,6 +55,8 @@ class DataStoreManager constructor (val context: Context){
         }
 
         //context.dataStore.data.map { it[FBAData]?: "0" }
+
+
     //2
 
     suspend fun saveSSId(ssId : String ) {
@@ -139,6 +146,7 @@ class DataStoreManager constructor (val context: Context){
             preferences.remove(IsInComingCall)
         }
     }
+
 
 
 }

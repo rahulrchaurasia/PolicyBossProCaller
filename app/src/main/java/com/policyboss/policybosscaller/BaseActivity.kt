@@ -75,34 +75,6 @@ open class BaseActivity : AppCompatActivity() {
 //        builder.show()
 //    }
 
-    open fun showAlert(title : String ,msg : String,
-
-                       action: (strType: String,dialog : DialogInterface) -> Unit) {
-        val alertDialog = AlertDialog.Builder(this)
-
-        alertDialog.apply {
-            setIcon(R.drawable.ic_email_24)
-            setTitle(title)
-            setMessage(msg)
-            setCancelable(false)
-            setPositiveButton("OK") {dialog, whichButton ->
-
-                //dialog.dismiss()
-                action("Y",dialog)
-
-            }
-
-            setNegativeButton("Cancel") { dialog, whichButton ->
-                // dialog.dismiss()
-                action("N", dialog)
-            }
-//        setNeutralButton("Neutral") { _, _ ->
-//            toast("clicked neutral button")
-//        }
-        }.create().show()
-    }
-
-
 
     open fun showSnackBar(view : View, strMessage: String){
 
@@ -113,6 +85,8 @@ open class BaseActivity : AppCompatActivity() {
     open fun showToast(strMessage: String){
         Toast.makeText(this,strMessage, Toast.LENGTH_SHORT).show()
     }
+
+
 
 
 

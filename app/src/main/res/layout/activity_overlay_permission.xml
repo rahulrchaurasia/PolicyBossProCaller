@@ -180,6 +180,36 @@
                 app:layout_constraintStart_toEndOf="@+id/tvBackgroundInfo" />
 
 
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/btnInfo"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+
+                android:background="@android:color/transparent"
+                android:textSize="16sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textBackgroundDescp"
+            />
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+
+                android:id="@+id/imgInfo"
+
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+
+
+                android:layout_marginEnd="16dp"
+                android:gravity="right"
+                android:src="@drawable/info_ic"
+                android:textColor="@color/white"
+
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textBackgroundDescp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

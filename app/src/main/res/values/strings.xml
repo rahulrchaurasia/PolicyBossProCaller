@@ -19,6 +19,7 @@
     <string name="title_activity_test">TestActivity</string>
 
     <string name="ok">OK</string>
-    <string name="permission_background_required">Required background permission to execute perfectly when app is in background</string>
+    <string name="permission_background_required">Select "No restrictions"\nAllow to run PolicyBoss Pro Caller in background. </string>
     <string name="permission_overlay_required">Required for PolicyBoss Pro Caller to display caller ID on the screen.</string>
+    <string name="logout"> <b>Do you want to logout?</b> </string>
 </resources>

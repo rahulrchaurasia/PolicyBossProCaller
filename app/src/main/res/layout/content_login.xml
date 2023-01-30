@@ -60,7 +60,7 @@
                 android:drawableRight="@drawable/ic_email_24"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/round_corner_toggle"
-                android:text="iostest32@gmail.com"
+                android:text="iostest12@gmail.com"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -69,12 +69,22 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgNotify"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/eight"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="@dimen/four"
+            android:layout_marginRight="@dimen/eight"
+            app:layout_constraintEnd_toStartOf="@+id/imglogout"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_notifications" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imglogout"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="@dimen/four"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_log_out" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

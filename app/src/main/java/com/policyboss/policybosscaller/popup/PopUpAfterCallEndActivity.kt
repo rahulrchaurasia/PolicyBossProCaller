@@ -26,7 +26,7 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
 
         //For Look Screen
-        showWhenLockedAndTurnScreenOn()
+       // showWhenLockedAndTurnScreenOn()
 
         super.onCreate(savedInstanceState)
         binding = ActivityPopUpAfterCallEndBinding.inflate(layoutInflater)

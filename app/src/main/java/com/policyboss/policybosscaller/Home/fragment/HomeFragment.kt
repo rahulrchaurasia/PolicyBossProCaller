@@ -1,5 +1,6 @@
 package com.policyboss.policybosscaller.Home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,9 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.jetpackdemo.MVVMDemo.Data.DashboardData.ConstantEntity
 import com.example.jetpackdemo.RetrofitHelper
+import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
+import com.example.policybosscaller.Utility.Utility
 import com.policyboss.policybosscaller.APIState
 import com.policyboss.policybosscaller.BaseFragment
 import com.policyboss.policybosscaller.Home.HomeViewModel
@@ -20,7 +23,10 @@ import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.data.repository.HomeRepository
 import com.policyboss.policybosscaller.data.response.ConstantDataResponse
 import com.policyboss.policybosscaller.databinding.FragmentHomeBinding
+import com.policyboss.policybosscaller.login.LoginActivity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeFragment : BaseFragment() {
@@ -52,6 +58,7 @@ class HomeFragment : BaseFragment() {
 
         init()
 
+        setListener()
 
         viewModel.getUserConstant()
 
@@ -67,6 +74,40 @@ class HomeFragment : BaseFragment() {
 
 
 
+    }
+
+    fun setListener(){
+
+        binding.imglogout.setOnClickListener {
+
+            Utility.showlogout(context =requireActivity(), msg = getString(R.string.logout )){
+
+                strType, dialog ->
+
+                when(strType){
+
+                    "Y" -> {
+                        dialog.dismiss()
+                        lifecycleScope.launchWhenStarted {
+                            DataStoreManager(requireContext()).clearAll()
+                            withContext(Dispatchers.Main){
+
+                                startActivity(Intent(requireActivity(),LoginActivity::class.java))
+                            }
+                        }
+
+
+
+
+                    }
+                    "N" -> {
+                        dialog.dismiss()
+                    }
+                }
+
+            }
+
+        }
     }
 
     private fun getUserConstantData(){
@@ -116,7 +157,7 @@ class HomeFragment : BaseFragment() {
         binding.txtpospNo.text =  "POSP NO-${entity?.POSPNo ?:""}"
 
 
-        binding.imgProfile.load(entity!!.loanparentphoto){
+        binding.imgProfile.load(entity!!.loanselfphoto){
             placeholder(R.drawable.circularbg)
             crossfade(true)
             crossfade(400)

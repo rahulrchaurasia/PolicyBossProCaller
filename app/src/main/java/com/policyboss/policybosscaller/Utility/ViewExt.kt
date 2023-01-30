@@ -16,14 +16,18 @@
 
 package com.example.policybosscaller.Utility
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.databinding.CustomBackgroundBinding
 
 /**************** For Snackbar *********************************************/
 fun View.showSnackbar(msgId: Int, length: Int) {
@@ -96,4 +100,9 @@ fun View.showAlerDialog(context : Context) {
 //            toast("clicked neutral button")
 //        }
     }.create().show()
+
+
+
+
+
 }

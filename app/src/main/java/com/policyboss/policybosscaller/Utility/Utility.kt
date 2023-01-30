@@ -1,7 +1,9 @@
 package com.example.policybosscaller.Utility
 
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,10 +17,14 @@ import android.provider.Settings
 import android.util.Base64
 import android.util.Base64.encodeToString
 import android.util.Log
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.policybosscaller.BuildConfig
+import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.databinding.CustomBackgroundBinding
 import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -66,6 +72,88 @@ object Utility {
             return true
         }
 
+    }
+
+    fun showCustom(context : Context){
+
+        val dialog = Dialog(context)
+        if(!dialog.isShowing) {
+            val binding = CustomBackgroundBinding.inflate(LayoutInflater.from(context) )
+            dialog.setContentView(binding.root)
+
+            if (dialog.window != null) {
+
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+
+            }
+            binding.imgClose.setOnClickListener {
+
+                dialog.dismiss()
+            }
+
+            dialog.setCancelable(true)
+
+            dialog.show()
+        }
+    }
+
+
+    open fun showAlert(context: Context,title : String = "PolicyBossProCaller" ,msg : String,
+
+                       action: (strType: String,dialog : DialogInterface) -> Unit) {
+        val alertDialog = AlertDialog.Builder(context)
+
+
+        alertDialog.apply {
+            setIcon(R.drawable.ic_email_24)
+            setTitle(title)
+            setMessage(msg)
+            setCancelable(false)
+            setPositiveButton("OK") {dialog, whichButton ->
+
+                //dialog.dismiss()
+                action("Y",dialog)
+
+            }
+
+            setNegativeButton("Cancel") { dialog, whichButton ->
+                // dialog.dismiss()
+                action("N", dialog)
+            }
+//        setNeutralButton("Neutral") { _, _ ->
+//            toast("clicked neutral button")
+//        }
+        }.create().show()
+    }
+
+
+
+    open fun showlogout(context: Context,title : String = "PolicyBossProCaller" ,msg : String,
+
+                       action: (strType: String,dialog : DialogInterface) -> Unit) {
+        val alertDialog = AlertDialog.Builder(context)
+
+
+        alertDialog.apply {
+            setIcon(R.drawable.ic_call_24)
+            setTitle(title)
+            setMessage(msg)
+            setCancelable(false)
+            setPositiveButton("Logout") {dialog, whichButton ->
+
+                //dialog.dismiss()
+                action("Y",dialog)
+
+            }
+
+            setNegativeButton("Cancel") { dialog, whichButton ->
+                // dialog.dismiss()
+                action("N", dialog)
+            }
+//        setNeutralButton("Neutral") { _, _ ->
+//            toast("clicked neutral button")
+//        }
+        }.create().show()
     }
 
 

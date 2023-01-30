@@ -163,19 +163,27 @@ class OverlayService : Service()  {
 
                         }
 
+                        CustomWIndow.openWindowPopUp(
+                            this.applicationContext,
+                            callType = callType,
+                            PhoneNumber = phoneNumber
+                        )
+
                         ApplicationPersistance(context!!).savePhoneCallType(callType,phoneNumber)
 
-                        CustomWIndow.verifyExsist(this.applicationContext)
-                        Handler(Looper.getMainLooper()).postDelayed({
-
-                            CustomWIndow.openWindowPopUp(
-                                this.applicationContext,
-                                callType = callType,
-                                PhoneNumber = phoneNumber
-                            )
-
-
-                        }, 200)
+                        //region Comment
+//                        CustomWIndow.verifyExsist(this.applicationContext)
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//
+//                            CustomWIndow.openWindowPopUp(
+//                                this.applicationContext,
+//                                callType = callType,
+//                                PhoneNumber = phoneNumber
+//                            )
+//
+//
+//                        }, 200)
+                        //endregion
 
                        // isEndPopUpDialogExist()
 
@@ -207,7 +215,7 @@ class OverlayService : Service()  {
                             )
 
 
-                            stopSelf()      // Forground Service is closed
+                          //  stopSelf()      // Forground Service is closed
 
                         }, 400)
 

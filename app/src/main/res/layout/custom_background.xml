@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lyParent"
+    android:layout_gravity="center"
+    tools:context=".popup.OverlayPopupPermissionActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <View
+            android:id="@+id/view"
+            app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_width="0dp"
+            android:layout_height="40dp"/>
+        <LinearLayout
+            android:id="@+id/lyBackground"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            android:layout_marginBottom="@dimen/eight"
+            android:layout_marginHorizontal="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/custom_curve_blue"
+            >
+
+            <LinearLayout
+                android:padding="@dimen/fourteen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/ibmplexsansmedium"
+                    android:text="@string/permission_background_required"
+                    />
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/twelve"
+                    android:layout_marginBottom="@dimen/twelve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:background="@color/white"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:background="@null"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/check_gif"
+                            android:layout_width="90dp"
+                            android:layout_height="40dp"/>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/four"
+                            android:layout_marginBottom="@dimen/fab_margin"
+                            android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:background="@null"
+
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/ibmplexsansmedium"
+                                android:gravity="center_vertical"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="15dp"
+                                android:textSize="18sp"
+
+                                android:text="No restrictions"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:background="@null"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/ibmplexsansmedium"
+                                android:text="Battery saver doesn't restrict app's activity"
+                                />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgClose"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="10dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+             android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic__close_white_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</RelativeLayout>
