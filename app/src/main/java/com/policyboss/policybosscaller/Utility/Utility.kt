@@ -76,16 +76,16 @@ object Utility {
 
     fun showCustom(context : Context){
 
-        val dialog = Dialog(context)
+        val dialog = Dialog(context,R.style.Dialog)
         if(!dialog.isShowing) {
             val binding = CustomBackgroundBinding.inflate(LayoutInflater.from(context) )
             dialog.setContentView(binding.root)
 
-            if (dialog.window != null) {
-
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
-
-            }
+//            if (dialog.window != null) {
+//
+//                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+//
+//            }
             binding.imgClose.setOnClickListener {
 
                 dialog.dismiss()

@@ -24,6 +24,30 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
 
 
 
+    fun saveOverlayStatus(status : Boolean) = viewModelScope.launch {
+
+        DataStoreManager(context).saveOverlyStatus(status)
+    }
+
+    fun getOverlayStatus() : Flow<Boolean >{
+
+//        viewModelScope.launch{
+//
+//        }
+
+       return DataStoreManager(context).getOverlyStatus()
+    }
+
+    fun getOverlayStatus2() =
+
+        viewModelScope.launch{
+            DataStoreManager(context).getOverlyStatus().collect{
+
+                return@collect
+            }
+        }
+
+
      fun getUserConstant()   =  viewModelScope.launch{
 
        // var fbaID  = String()

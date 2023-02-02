@@ -25,6 +25,8 @@ class DataStoreManager constructor (val context: Context){
         val SSIDData = stringPreferencesKey("SSIDData")
         val PARENTDATA = stringPreferencesKey("PARENTID")
 
+        val IsOverlayShow = booleanPreferencesKey(Constant.IsOverlayShow)
+
        // val LoginData= stringPreferencesKey(Constant.loginData)
 
     }
@@ -42,6 +44,8 @@ class DataStoreManager constructor (val context: Context){
 
         }
     }
+
+
      fun getFBAID(): Flow<String> =
 
         context.dataStore.data.catch {
@@ -120,7 +124,25 @@ class DataStoreManager constructor (val context: Context){
         }
     }
 
+    suspend fun saveOverlyStatus(isShow :Boolean ) {
+        context.dataStore.edit { preferences ->
+            preferences[IsOverlayShow] = isShow
 
+
+        }
+    }
+
+    fun getOverlyStatus(): Flow<Boolean> =
+
+        context.dataStore.data.catch {
+
+            if(this is Exception){
+                emit(emptyPreferences())
+            }
+        }.map { preferences ->
+            preferences[IsOverlayShow] ?: false
+
+        }
     suspend fun saveIsCallInComming( isInComingCall : Boolean ) {
         context.dataStore.edit {
 

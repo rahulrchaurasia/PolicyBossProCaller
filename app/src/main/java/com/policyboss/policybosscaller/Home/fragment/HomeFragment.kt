@@ -64,6 +64,9 @@ class HomeFragment : BaseFragment() {
 
 
         getUserConstantData()
+        getOverlayStatus()
+
+
     }
 
     fun init(){
@@ -143,6 +146,24 @@ class HomeFragment : BaseFragment() {
                             }
 
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getOverlayStatus(){
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+                viewModel.getOverlayStatus().collect(){
+
+                    if(it){
+                        showAlert("Data is Checked")
+                    }else{
+                        showAlert("Data is Not Checked")
                     }
                 }
             }

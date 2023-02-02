@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.databinding.ActivityBaseBinding
 import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
@@ -37,7 +38,7 @@ open class BaseActivity : AppCompatActivity() {
             dialog.setContentView(dialogLoadingBinding.root)
             if (dialog.window != null) {
 
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+                dialog.window!!.setBackgroundDrawable(ContextCompat.getDrawable(this@BaseActivity,0))
 
             }
             if(msg.isNotEmpty()){

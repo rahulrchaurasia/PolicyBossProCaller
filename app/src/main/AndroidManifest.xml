@@ -42,8 +42,12 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <uses-permission android:name="android.intent.action.BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+         android:name=".MyApplication"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -161,6 +165,17 @@
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.NEW_OUTGOING_CALL" /> -->
             <!-- </intent-filter> -->
+        </receiver>
+
+        <receiver
+            android:name=".BroadCastReceiver.CustomBootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <!-- REGISTER TO RECEIVE BOOT_COMPLETED EVENTS -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+            </intent-filter>
         </receiver>
 
         <service

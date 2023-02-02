@@ -60,6 +60,7 @@ object Constant {
 
     const val SERVICE_STOP= "STOP"
     const val SERVICE_START= "START"
+    const val SERVICE_AFTER_BOOT= "AFTERBOOT"
 
     val PrivateCarUrl = "https://www.policyboss.com/UI22/car-insurance?ss_id=119225&fba_id=89433&v=20200609&sub_fba_id=0&ip_address=&mac_address=&app_version=policyboss-3.0.3&device_id=b4d1aefb362dfbed&product_id=1&login_ssid="
 
@@ -76,6 +77,8 @@ object Constant {
     const val IS_OVERLAYSCREEN= "IS_OVERLAYSCREEN"
     const val OVERLAY_DATA= "OVERLAY_DATA"
     const val BACKGROUND_DATA= "BACKGROUND_DATA"
+
+    const val IsOverlayShow = "ISOverlayDisplayShow"
 
 
     fun hideKeyBoard(view: View?, context: Context) {

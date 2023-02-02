@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
+import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
@@ -13,8 +14,11 @@ import android.os.IBinder
 import android.os.Looper
 import android.provider.CallLog
 import android.util.Log
+import android.view.*
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+
 import com.example.policybosscaller.OverlayDemo.CallType
 import com.example.policybosscaller.OverlayDemo.WindowOverlay
 import com.example.policybosscaller.Prefrence.ApplicationPersistance
@@ -22,6 +26,8 @@ import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NotifyService
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.WebView.CommonWebViewActivity
+import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
 import com.policyboss.policybosscaller.popup.PopUpAfterCallEndActivity
 
 
@@ -48,47 +54,54 @@ class OverlayService : Service()  {
 
         private var context: Context? = null
 
+        private var notificationManager : NotificationManager? = null
+        
+
         fun  getServiceContext(mcontext: Context) : Context {
 
             if(context == null){
                 context = mcontext
+
             }
+            if(notificationManager == null){
+                notificationManager = context!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            }
+
             return context as Context
         }
+
        // @SuppressLint("SuspiciousIndentation")
-        fun startService(context: Context, callType: CallType, phoneNumber: String? = "") {
+        fun startServiceAfterBoot(context: Context) {
+
+        try {
+
+
+            val startIntent = Intent(context, OverlayService::class.java)
+            startIntent.setAction(Constant.SERVICE_AFTER_BOOT)
+
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+
+                Handler(Looper.getMainLooper()).post{
+
+                    ContextCompat.startForegroundService(context,startIntent)
+                }
 
 
 
-           var strCALLTYPE = ""
-
-           when(callType){
-               CallType.INCOMMING ->{
-                   strCALLTYPE =
-                          context.resources.getString(R.string.incomming_call)
+            } else {
 
 
-               }
-               CallType.OUTGOING -> {
-                   strCALLTYPE = context.resources.getString(R.string.outgoing_call)
+                Handler(Looper.getMainLooper()).post{
 
-               }
-           }
-
-           val startIntent = Intent(context, OverlayService::class.java)
-           startIntent.setAction(Constant.SERVICE_START)
-           startIntent.putExtra(Constant.CALL_TYPE,strCALLTYPE)
-           startIntent.putExtra(Constant.Phone_NUMBER,phoneNumber)
-
-           if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+                    context.startService(startIntent)
+                }
+            }
 
 
-               ContextCompat.startForegroundService(context,startIntent)
-
-           } else {
-
-               context.startService(startIntent)
-           }
+        }
+        catch (ex : Exception){ }
 
 
         }
@@ -115,8 +128,70 @@ class OverlayService : Service()  {
 
         }
 
+        fun startService(context: Context, callType: CallType, phoneNumber: String? = "") {
+
+            try {
+
+                var strCALLTYPE = ""
+
+                when(callType){
+                    CallType.INCOMMING ->{
+                        strCALLTYPE =
+                            context.resources.getString(R.string.incomming_call)
 
 
+                    }
+                    CallType.OUTGOING -> {
+                        strCALLTYPE = context.resources.getString(R.string.outgoing_call)
+
+                    }
+                }
+
+                val startIntent = Intent(context, OverlayService::class.java)
+                startIntent.setAction(Constant.SERVICE_START)
+                startIntent.putExtra(Constant.CALL_TYPE,strCALLTYPE)
+                startIntent.putExtra(Constant.Phone_NUMBER,phoneNumber)
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+
+                    Handler(Looper.getMainLooper()).post{
+
+                        ContextCompat.startForegroundService(context,startIntent)
+                    }
+
+
+
+                } else {
+
+
+                    Handler(Looper.getMainLooper()).post{
+
+                        context.startService(startIntent)
+                    }
+                }
+
+
+            }
+            catch (ex : Exception){ }
+
+
+        }
+
+
+
+
+        private fun createNotificationChannel() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val serviceChannel = NotificationChannel(
+                                    Constant.CHANNEL_ID,
+                                    Constant.CHANNEL_NAME,
+                                    NotificationManager.IMPORTANCE_DEFAULT)
+                //val manager = getSystemService(NotificationManager::class.java)
+                serviceChannel.lockscreenVisibility =
+                    Notification.VISIBILITY_PUBLIC
+                notificationManager!!.createNotificationChannel(serviceChannel)
+            }
+        }
 
     }
 
@@ -160,7 +235,7 @@ class OverlayService : Service()  {
 
                         } else {
 
-
+                            showForeGroundNotification(callType, phoneNumber)
                         }
 
                         CustomWIndow.openWindowPopUp(
@@ -172,10 +247,10 @@ class OverlayService : Service()  {
                         ApplicationPersistance(context!!).savePhoneCallType(callType,phoneNumber)
 
                         //region Comment
-//                        CustomWIndow.verifyExsist(this.applicationContext)
+//                        verifyExsist(this.applicationContext)
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //
-//                            CustomWIndow.openWindowPopUp(
+//                            openWindowPopUp(
 //                                this.applicationContext,
 //                                callType = callType,
 //                                PhoneNumber = phoneNumber
@@ -187,10 +262,18 @@ class OverlayService : Service()  {
 
                        // isEndPopUpDialogExist()
 
-
-
-                        //endregion
                     }
+
+                    intent.action.equals(Constant.SERVICE_AFTER_BOOT) -> {
+                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            createNotificationChannel()
+                            showForeGroundNotification(callType, phoneNumber)
+
+                        }else{
+                            showForeGroundNotification(callType, phoneNumber)
+                        }
+                    }
+
                     intent.action.equals(Constant.SERVICE_STOP) -> {
 
                         //region Stop Service
@@ -198,9 +281,10 @@ class OverlayService : Service()  {
 
                         //
 
-                        CustomWIndow.close(this.applicationContext)    // Window Popup is Closed
+                        CustomWIndow.close(context!!)    // Window Popup is Closed
 
-                        Handler(Looper.getMainLooper()).postDelayed({
+
+                        Handler(Looper.getMainLooper()).post{
 
                             startActivity(
                                 Intent(
@@ -213,14 +297,12 @@ class OverlayService : Service()  {
                                     .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
                             )
+                        }
 
-
-                          //  stopSelf()      // Forground Service is closed
-
-                        }, 400)
 
                         //endregion
                     }
+
                     else -> {
                         Log.d(Constant.TAG, "No Service Triggered")
                     }
@@ -240,6 +322,7 @@ class OverlayService : Service()  {
         super.onDestroy()
         stopSelf()
     }
+
 
 
 
@@ -270,14 +353,7 @@ class OverlayService : Service()  {
         startForeground(Math.round(Math.random()*1000).toInt(), notification)
     }
 
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val serviceChannel = NotificationChannel(Constant.CHANNEL_ID, Constant.CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT)
-            val manager = getSystemService(NotificationManager::class.java)
-            manager!!.createNotificationChannel(serviceChannel)
-        }
-    }
+
 
     //endregion
 
