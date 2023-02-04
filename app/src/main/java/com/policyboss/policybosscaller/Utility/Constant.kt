@@ -1,11 +1,8 @@
 package com.example.policybosscaller.Utility
 
-import android.app.ActivityManager.RunningTaskInfo
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.View
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 
 
@@ -45,6 +42,7 @@ object Constant {
     const val CALL_TYPE = "calltype"
     const val MissedCall = "Missed Call"
     const val EndCall = "Call Ended"
+    const val StartCall = "Call Started"
     const val Phone_NUMBER = "phoneNumber"
 
     var SHARED_PREF = "policyBossCallerPrefrence"
@@ -59,6 +57,7 @@ object Constant {
     const val OVERLAY_SERVICE_KEY = "OVERLAYSERVICE"
 
     const val SERVICE_STOP= "STOP"
+    const val SERVICE_STOP_INCOMING_ANSWERED= "STOPINCOMING_ANSWERED"
     const val SERVICE_START= "START"
     const val SERVICE_AFTER_BOOT= "AFTERBOOT"
 
@@ -79,6 +78,8 @@ object Constant {
     const val BACKGROUND_DATA= "BACKGROUND_DATA"
 
     const val IsOverlayShow = "ISOverlayDisplayShow"
+
+    const val CALL_RECEIVER = "SHOW_CALL_Detail"
 
 
     fun hideKeyBoard(view: View?, context: Context) {

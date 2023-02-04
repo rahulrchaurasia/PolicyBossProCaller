@@ -20,9 +20,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.policybosscaller.BuildConfig
+import com.policyboss.policybosscaller.MyApplication
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.databinding.CustomBackgroundBinding
 import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
@@ -36,6 +38,7 @@ import java.util.*
 
 object Utility {
 
+    //val dialog = Dialog( MyApplication.getInstance.applicationContext,R.style.Dialog)
 
     fun isOverlayPermissionExist(context: Context) : Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -95,6 +98,37 @@ object Utility {
 
             dialog.show()
         }
+    }
+
+    open fun showDialog(context : Context ,msg: String = "Loading Please Wait!!") : Dialog {
+        val dialog = Dialog( MyApplication.getInstance.applicationContext,R.style.Dialog)
+
+        if(!dialog.isShowing) {
+            val dialogLoadingBinding = DialogLoadingBinding.inflate(LayoutInflater.from(context))
+            dialog.setContentView(dialogLoadingBinding.root)
+
+            if(msg.isNotEmpty()){
+                dialogLoadingBinding.txtMessage.text = msg
+
+            }
+            dialog.setCancelable(false)
+            dialog.show()
+        }
+        return dialog
+    }
+
+    open fun cancelDialog(){
+        val dialog = Dialog( MyApplication.getInstance.applicationContext,R.style.Dialog)
+
+        if(dialog!= null){
+            if(dialog.isShowing){
+
+                dialog.dismiss()
+            }
+        }
+
+
+
     }
 
 

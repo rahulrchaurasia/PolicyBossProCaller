@@ -182,7 +182,7 @@
             android:name=".OverlayDemo.OverlayService"
             android:enabled="true"
             android:exported="true"
-            android:stopWithTask="false" />
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

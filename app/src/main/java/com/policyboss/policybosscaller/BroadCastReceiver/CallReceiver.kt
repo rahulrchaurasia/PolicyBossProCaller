@@ -11,10 +11,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.example.policybosscaller.OverlayDemo.CallType
-import com.example.policybosscaller.Prefrence.ApplicationPersistance
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import com.policyboss.policybosscaller.data.model.CallType
+import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NotifyService
+import com.policyboss.policybosscaller.OverlayDemo.CallWorkManager
 import com.policyboss.policybosscaller.OverlayDemo.OverlayService
 import kotlinx.coroutines.*
 import java.util.*
@@ -34,12 +37,12 @@ class CallReceiver  : BroadcastReceiver() {
     var state = 0
 
 
-    
+
     @SuppressWarnings
     override fun onReceive(context: Context?, intent: Intent?) {
 
 
-        isInComingCall = ApplicationPersistance(context!!).readIsCallInComming()
+        isInComingCall = SharePrefernce(context!!).readIsCallInComming()
         // Incoming call
         val stateStr: String = intent!!.getExtras()!!.getString(TelephonyManager.EXTRA_STATE)!!
 
@@ -102,31 +105,43 @@ class CallReceiver  : BroadcastReceiver() {
     //Derived classes should override these to respond to specific events of interest
 
     protected fun onIncomingCallStarted(context: Context,phoneNumber : String?) {
+        NotifyService.callNotification(mcontext = context!!,callType = Constant.StartCall, phoneNumber = phoneNumber)
 
 
-        Log.d(Constant.TAG,"onIncomingCallStarted"+ phoneNumber)
-                                // Only For Ringing
-                        OverlayService.startService(
-                            context = OverlayService.getServiceContext(context),
-                            callType = CallType.INCOMMING,
-                            phoneNumber = savedNumber
-                        )
+
+            Log.d(Constant.TAG,"onIncomingCallStarted"+ phoneNumber)
+            // Only For Ringing
+            OverlayService.startService(
+                context = OverlayService.getServiceContext(context.applicationContext),
+                callType = CallType.INCOMMING,
+                phoneNumber = savedNumber
+            )
+
+
+
     }
     protected fun onOutgoingCallStarted(context: Context,phoneNumber : String?) {
+        NotifyService.callNotification(mcontext = context!!,callType = Constant.StartCall, phoneNumber = phoneNumber)
 
 
-        Log.d(Constant.TAG,"onOutgoingCallStarted"+ phoneNumber)
+        // Create Forground Notification
 
-        //  Outgoing call
 
-        OverlayService.startService(context = OverlayService.getServiceContext(context),callType = CallType.OUTGOING , phoneNumber = savedNumber )
+         Log.d(Constant.TAG,"onOutgoingCallStarted"+ phoneNumber)
+            //  Outgoing call
+            OverlayService.startService(
+                context = OverlayService.getServiceContext(context.applicationContext),
+                callType = CallType.OUTGOING ,
+                phoneNumber = savedNumber )
+
+
 
     }
 
     protected  fun onIncomingCallAnswered(context: Context,phoneNumber : String?){
 
         Log.d(Constant.TAG,"onCallAnswered"+ phoneNumber)
-        OverlayService.stopService()
+        OverlayService.stopServiceWithoutEndPopuCall()
     }
 
     protected fun onIncomingCallEnded(context: Context, phoneNumber : String?) {
@@ -159,13 +174,13 @@ class CallReceiver  : BroadcastReceiver() {
     fun onCallStateChanged(context: Context?, state: Int , phoneNumber : String?) {
 
 
-         lastState = ApplicationPersistance(context!!).readLastState()
+         lastState = SharePrefernce(context!!).readLastState()
         //region comment
 
         when (state) {
             TelephonyManager.CALL_STATE_RINGING -> {
                 //isInComingCall = true
-                ApplicationPersistance(context!!).saveIsCallInComming(true)
+                SharePrefernce(context!!).saveIsCallInComming(true)
                 //callStartTime = Date()
 
                 onIncomingCallStarted(context!!, savedNumber)
@@ -173,7 +188,7 @@ class CallReceiver  : BroadcastReceiver() {
             TelephonyManager.CALL_STATE_OFFHOOK ->                 //Transition of ringing->offhook are pickups of incoming calls.  Nothing done on them
                 if (lastState != TelephonyManager.CALL_STATE_RINGING) {
                    // isInComingCall = false
-                    ApplicationPersistance(context!!).saveIsCallInComming(false)
+                    SharePrefernce(context!!).saveIsCallInComming(false)
                     //callStartTime = Date()
                     onOutgoingCallStarted(context!!, savedNumber)
                 }
@@ -182,13 +197,13 @@ class CallReceiver  : BroadcastReceiver() {
 
                      //callStartTime =  Date();
                     onIncomingCallAnswered(context, savedNumber);
-                    ApplicationPersistance(context!!).saveIsCallInComming(false)
+                    SharePrefernce(context!!).saveIsCallInComming(false)
                 }
             TelephonyManager.CALL_STATE_IDLE ->                 //Went to idle-  this is the end of a call.  What type depends on previous state(s)
                 if (lastState == TelephonyManager.CALL_STATE_RINGING) {
                     //Ring but no pickup-  a miss
                     onMissedCall(context!!, savedNumber)
-                } else if (ApplicationPersistance(context!!).readIsCallInComming()) {
+                } else if (SharePrefernce(context!!).readIsCallInComming()) {
                     onIncomingCallEnded(context!!, savedNumber)
                 } else {
                     onOutgoingCallEnded(context!!, savedNumber)
@@ -197,7 +212,7 @@ class CallReceiver  : BroadcastReceiver() {
 
         //endregion
 
-        ApplicationPersistance(context!!).saveLastState(state)
+        SharePrefernce(context!!).saveLastState(state)
        // lastState = state     // save in local db
 
 

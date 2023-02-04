@@ -8,10 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
-import android.view.Window
 import android.view.WindowManager
-import androidx.datastore.preferences.core.Preferences
-import com.example.policybosscaller.Prefrence.ApplicationPersistance
+import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.WebView.CommonWebViewActivity
@@ -21,7 +19,7 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
     private lateinit var binding : ActivityPopUpAfterCallEndBinding
 
-    private lateinit var sharePreferences: ApplicationPersistance
+    private lateinit var sharePreferences: SharePrefernce
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -35,7 +33,7 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
             R.anim.slide_up_in, R.anim.slide_up_out)
 
 
-        sharePreferences = ApplicationPersistance(this@PopUpAfterCallEndActivity)
+        sharePreferences = SharePrefernce(this@PopUpAfterCallEndActivity)
         binding.lyParent.setOnClickListener(this)
         binding.lyPrivateCar.setOnClickListener(this)
         binding.lyTwoWheeler.setOnClickListener(this)

@@ -349,6 +349,7 @@
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
     </style>
 
+<!--    /// VIMP Make Dialog Screen Transparentand Transluent-->
     <style name="Dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
