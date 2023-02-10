@@ -3,6 +3,8 @@ package com.example.policybosscaller.Prefrence
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.policybosscaller.Utility.Constant
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 /**
@@ -21,6 +23,7 @@ open class SharePrefernce (context: Context)  {
     val PhoneNumerKEY = "PhoneNumerKEY"
     val CallTypeKey = "CallTypeKey"
     val WindowDialogStatus ="WindowDialogStattus"
+    val BootTimeKey ="BootTimeKey"
 
     init {
         sharedPreferences = context.getSharedPreferences(Constant.SHARED_PREF, Context.MODE_PRIVATE)
@@ -28,15 +31,43 @@ open class SharePrefernce (context: Context)  {
     }
 
 
+    //region Commented Date in String format Save in Prefrences
 
-    open fun saveWindowDialogStatus(bln: Boolean ){
+    open fun saveOpenBootTime1(strDate: Date ){
+
+        var  formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss")
+        editor.putString(BootTimeKey,formatter.format(strDate))
+        editor.commit()
+    }
+
+    open fun saveOpenBootTime1(strDate: String ){
+
+        editor.putString(BootTimeKey,"")
+        editor.commit()
+    }
+    open fun getBootCalculatedTime1(): String {
+
+        return sharedPreferences.getString(BootTimeKey, "").toString()
+    }
+    //endregion
+    open fun saveOpenBootTime(timeinMiiSec: Long ){
+
+        editor.putLong(BootTimeKey,timeinMiiSec)
+        editor.commit()
+    }
+
+    open fun getBootCalculatedTime(): Long {
+
+        return sharedPreferences.getLong(BootTimeKey, 0)
+    }
+    open fun saveOverlayDialogStatus(bln: Boolean ){
 
         editor.putBoolean(WindowDialogStatus,bln)
         editor.commit()
     }
-    open fun isWindowDialogOpen(): Boolean {
+    open fun isOverlayPopup(): Boolean {
 
-        return sharedPreferences.getBoolean(WindowDialogStatus, false)
+        return sharedPreferences.getBoolean(WindowDialogStatus, true)
     }
 
 

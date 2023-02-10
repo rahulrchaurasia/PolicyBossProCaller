@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.policyboss.policybosscaller.BuildConfig
+import com.policyboss.policybosscaller.Utility.Product
 
 
 object Constant {
@@ -82,6 +84,7 @@ object Constant {
     const val CALL_RECEIVER = "SHOW_CALL_Detail"
 
 
+
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -103,5 +106,21 @@ object Constant {
     }
 
 
+    fun getBikeURL(url : String ,parent_ssid : String){
+
+      val data =   "&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + BuildConfig.VERSION_NAME + "&device_id=" + "&product_id=10&login_ssid=" + parent_ssid
+
+    }
+    fun getCarURL(url : String ,parent_ssid : String){
+
+        val data =   "&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + BuildConfig.VERSION_NAME + "&device_id=" + "&product_id=10&login_ssid=" + parent_ssid
+
+    }
+
+    fun getHealthURL(url : String ,parent_ssid : String){
+
+        val data =   "&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + BuildConfig.VERSION_NAME + "&device_id=" + "&product_id=10&login_ssid=" + parent_ssid
+
+    }
 
 }

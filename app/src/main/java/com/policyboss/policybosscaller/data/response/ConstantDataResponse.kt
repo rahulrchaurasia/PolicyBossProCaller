@@ -1,6 +1,7 @@
 package com.policyboss.policybosscaller.data.response
 
-import com.example.jetpackdemo.MVVMDemo.Data.DashboardData.ConstantEntity
+import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
+
 
 data class ConstantDataResponse(
     val MasterData: ConstantEntity,

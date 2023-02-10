@@ -6,20 +6,38 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.WindowManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
+import com.example.policybosscaller.Utility.Utility
+import com.policyboss.policybosscaller.Home.HomeViewModel
+import com.policyboss.policybosscaller.Home.HomeViewModelFactory
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.RetrofitHelper
+import com.policyboss.policybosscaller.Utility.Product
 import com.policyboss.policybosscaller.WebView.CommonWebViewActivity
+import com.policyboss.policybosscaller.data.db.database.CallerDatabase
+import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
+import com.policyboss.policybosscaller.data.repository.HomeRepository
 import com.policyboss.policybosscaller.databinding.ActivityPopUpAfterCallEndBinding
+import kotlinx.coroutines.launch
 
 class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
     private lateinit var binding : ActivityPopUpAfterCallEndBinding
 
     private lateinit var sharePreferences: SharePrefernce
+    lateinit var viewModel: HomeViewModel
+    private var constantEntity: ConstantEntity? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -34,6 +52,7 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
 
         sharePreferences = SharePrefernce(this@PopUpAfterCallEndActivity)
+        init()
         binding.lyParent.setOnClickListener(this)
         binding.lyPrivateCar.setOnClickListener(this)
         binding.lyTwoWheeler.setOnClickListener(this)
@@ -42,6 +61,8 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
          bindData()
 
         sharePreferences.clear()
+
+        observe()
     }
 
 
@@ -50,6 +71,41 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
         return this@PopUpAfterCallEndActivity.getClassName().toString()
     }
 
+    fun init(){
+
+        var demoDatabase = CallerDatabase.getDatabase(this.applicationContext)
+        var repository = HomeRepository(RetrofitHelper.retrofitCallerApi,demoDatabase)
+        var viewModelFactory = HomeViewModelFactory(this,repository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
+
+
+
+
+
+    }
+
+
+
+    private fun observe() {
+
+        viewModel.constantData.observe(this@PopUpAfterCallEndActivity) { constantEntity ->
+
+            constantEntity?.let {
+
+                this.constantEntity = it.get(0)
+//                Log.d(Constant.TAG, "" + it[0].FBAId + "\n Car " + it[0].FourWheelerUrl
+//                            + " \n Health" + it[0].healthurl
+//                            + " \n Bike" + it[0].TwoWheelerUrl
+//                )
+
+            }
+
+
+        }
+
+
+
+    }
 
     override fun onClick(view: View?) {
 
@@ -128,38 +184,51 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
             Constant.PrivateCar ->{
 
-                url = Constant.PrivateCarUrl
+
                 name = "MOTOR INSURANCE"
+                constantEntity?.let {
+                    url =  Utility.getURL(url = it.FourWheelerUrl, parent_ssid = "", type = Product.car)
+
+                }
+
             }
             Constant.TwoWheeler ->{
 
-                url = Constant.TwoWheelerUrl
+                //url = Constant.TwoWheelerUrl
                 name = "TWO WHEELER INSURANCE"
+                constantEntity?.let {
+                    url =    Utility.getURL(url = it.TwoWheelerUrl, parent_ssid = "", type = Product.car)
+
+                }
             }
             Constant.Health ->{
 
-                url = Constant.HealthUrl
+                //url = Constant.HealthUrl
                 name = "HEALTH INSURANCE"
+                constantEntity?.let {
+                    url =    Utility.getURL(url = it.healthurl, parent_ssid = "", type = Product.car)
+
+                }
             }
         }
 
-        val dialogIntent = Intent(this@PopUpAfterCallEndActivity, CommonWebViewActivity::class.java)
-            .putExtra("URL", url)
-            .putExtra("NAME", name)
-            .putExtra("TITLE", name);
-        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        if(!url.isEmpty()){
 
-        startActivity(dialogIntent)
+            val dialogIntent = Intent(this@PopUpAfterCallEndActivity, CommonWebViewActivity::class.java)
+                .putExtra("URL", url)
+                .putExtra("NAME", name)
+                .putExtra("TITLE", name);
+            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
-    }
+            startActivity(dialogIntent)
 
-    override fun onDestroy() {
-        super.onDestroy()
-
+        }
 
     }
+
+
 
 
 }

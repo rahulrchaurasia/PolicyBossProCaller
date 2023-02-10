@@ -1,30 +1,35 @@
 package com.policyboss.policybosscaller.Home.fragment
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.example.jetpackdemo.MVVMDemo.Data.DashboardData.ConstantEntity
-import com.example.jetpackdemo.RetrofitHelper
+
+
 import com.example.policybosscaller.Prefrence.DataStoreManager
+import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.Utility
-import com.policyboss.policybosscaller.APIState
-import com.policyboss.policybosscaller.BaseFragment
+import com.policyboss.policybosscaller.*
 import com.policyboss.policybosscaller.Home.HomeViewModel
 import com.policyboss.policybosscaller.Home.HomeViewModelFactory
-import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.data.db.database.CallerDatabase
+import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
 import com.policyboss.policybosscaller.data.repository.HomeRepository
-import com.policyboss.policybosscaller.data.response.ConstantDataResponse
 import com.policyboss.policybosscaller.databinding.FragmentHomeBinding
 import com.policyboss.policybosscaller.login.LoginActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,7 +40,10 @@ class HomeFragment : BaseFragment() {
     lateinit var layout: View
     lateinit var viewModel: HomeViewModel
 
-    private val binding get() = _binding!!
+    private var constantEntity: ConstantEntity? = null
+
+    private val binding
+    get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,21 +68,27 @@ class HomeFragment : BaseFragment() {
 
         setListener()
 
-        viewModel.getUserConstant()
+        observe()
 
+        // region commented We apply on Activity so All fragment can use it
 
-        getUserConstantData()
-        getOverlayStatus()
+//        viewModel.saveUserConstant()
+//        getUserConstantData()
+        //endregion
+
 
 
     }
 
     fun init(){
 
-        var repository = HomeRepository(requireActivity(),RetrofitHelper.retrofitCallerApi)
+        var demoDatabase = CallerDatabase.getDatabase(requireContext().applicationContext)
+        var repository = HomeRepository(RetrofitHelper.retrofitCallerApi,demoDatabase)
         var viewModelFactory = HomeViewModelFactory(requireActivity(),repository)
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(HomeViewModel::class.java)
 
+
+        SharePrefernce(requireContext()).saveOpenBootTime(0)
 
 
     }
@@ -83,36 +97,101 @@ class HomeFragment : BaseFragment() {
 
         binding.imglogout.setOnClickListener {
 
-            Utility.showlogout(context =requireActivity(), msg = getString(R.string.logout )){
 
-                strType, dialog ->
+            // region Lemda fun directly called
+//            Utility.showlogout(context =requireActivity(), msg = getString(R.string.logout )){
+//
+//                strType, dialog ->
+//
+//                when(strType){
+//
+//                    "Y" -> {
+//                        dialog.dismiss()
+//                        lifecycleScope.launchWhenStarted {
+//                            DataStoreManager(requireContext()).clearAll()
+//                            withContext(Dispatchers.Main){
+//
+//                                startActivity(Intent(requireActivity(),LoginActivity::class.java))
+//                            }
+//                        }
+//
+//
+//
+//
+//                    }
+//                    "N" -> {
+//                        dialog.dismiss()
+//                    }
+//                }
+//
+//            }
 
-                when(strType){
+            //endregion
 
-                    "Y" -> {
-                        dialog.dismiss()
-                        lifecycleScope.launchWhenStarted {
-                            DataStoreManager(requireContext()).clearAll()
-                            withContext(Dispatchers.Main){
-
-                                startActivity(Intent(requireActivity(),LoginActivity::class.java))
-                            }
-                        }
+           Utility.showlogout(context =requireActivity(), msg = getString(R.string.logout ), action = ::alertlogotClickAction)
+        }
 
 
 
+    }
 
-                    }
-                    "N" -> {
-                        dialog.dismiss()
+    fun alertlogotClickAction( strType : String, dialog : DialogInterface){
+
+        when(strType){
+
+            "Y" -> {
+                dialog.dismiss()
+                lifecycleScope.launchWhenStarted {
+                    DataStoreManager(requireContext()).clearAll()
+                    withContext(Dispatchers.Main){
+
+                        startActivity(Intent(requireActivity(),LoginActivity::class.java))
                     }
                 }
 
+
+
+
             }
+            "N" -> {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun observe(){
+
+        viewModel.constantData.observe(viewLifecycleOwner){ constantEntity ->
+
+            constantEntity?.let {
+
+                this.constantEntity = it.get(0)
+
+                setData(it.get(0))
+            }
+
 
         }
     }
 
+
+    private fun setData( entity: ConstantEntity?){
+
+        binding.txtName.text = entity?.FullName ?: ""
+
+        binding.txtfbaID.text =  "FBAID-${entity?.FBAId ?:""}"
+        binding.txtpospNo.text =  "POSP NO-${entity?.POSPNo ?:""}"
+
+
+        binding.imgProfile.load(entity!!.loanselfphoto){
+            placeholder(R.drawable.circularbg)
+            crossfade(true)
+            crossfade(400)
+            transformations(RoundedCornersTransformation(100f ))
+        }
+    }
+
+    // region NOT IN USED
     private fun getUserConstantData(){
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -137,7 +216,7 @@ class HomeFragment : BaseFragment() {
                         is APIState.Success -> {
 
                             cancelDialog()
-                            Log.d(Constant.TAG,"SUCCESS"+ it)
+                            // Log.d(Constant.TAG,"SUCCESS"+ it.data.toString())
 
                             it.data?.let {
 
@@ -158,33 +237,34 @@ class HomeFragment : BaseFragment() {
 
             repeatOnLifecycle(Lifecycle.State.STARTED){
 
-                viewModel.getOverlayStatus().collect(){
+//                viewModel.getOverlayStatus().collect(){
+//                    if(it){
+//                        showAlert("Data is Checked")
+//                    }else{
+//                        showAlert("Data is Not Checked")
+//                    }
+//                }
 
-                    if(it){
-                        showAlert("Data is Checked")
-                    }else{
-                        showAlert("Data is Not Checked")
+
+                viewModel.getOverlayStatus().catch { e ->
+                    e.printStackTrace()
+                }.collect{
+
+                    withContext(Dispatchers.Main){
+                        if(it){
+                            showAlert("Data is Checked")
+                        }else{
+                            showAlert("Data is Not Checked")
+                        }
                     }
                 }
+
             }
         }
     }
 
-    private fun setData( entity: ConstantEntity?){
+    //endregion
 
-        binding.txtName.text = entity?.FullName ?: ""
-
-        binding.txtfbaID.text =  "FBAID-${entity?.FBAId ?:""}"
-        binding.txtpospNo.text =  "POSP NO-${entity?.POSPNo ?:""}"
-
-
-        binding.imgProfile.load(entity!!.loanselfphoto){
-            placeholder(R.drawable.circularbg)
-            crossfade(true)
-            crossfade(400)
-            transformations(RoundedCornersTransformation(100f ))
-        }
-    }
 
     companion object {
         @JvmStatic

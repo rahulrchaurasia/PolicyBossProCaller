@@ -32,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        overridePendingTransition(0, 0)
 
         //user behaviour data collection in Async
         Handler(Looper.myLooper()!!).postDelayed({
@@ -67,7 +67,8 @@ class SplashScreenActivity : AppCompatActivity() {
                                     startActivity(Intent(this@SplashScreenActivity, HomeActivity::class.java))
                                     this@SplashScreenActivity.finish()
                                 }else{
-                                    startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                                    startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                                        .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
                                     this@SplashScreenActivity.finish()
                                 }
 

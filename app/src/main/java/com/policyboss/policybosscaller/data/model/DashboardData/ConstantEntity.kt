@@ -1,11 +1,13 @@
-package com.example.jetpackdemo.MVVMDemo.Data.DashboardData
+package  com.policyboss.policybosscaller.data.model.DashboardData
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
-
-
+@Entity
 data class ConstantEntity(
 
-
+    @PrimaryKey
     val FBAId: String,
     val AddPospVisible: String,
     val CVUrl: String,
@@ -52,7 +54,7 @@ data class ConstantEntity(
     val cobrowserisactive: String,
     val cobrowserlicensecode: String,
     val crnmobileno: String,
-   val dashboardarray: List<DashboardList>,      // 05 temp
+   // val dashboardarray: List<DashboardList>,      // 05 temp
     val emplat: String,
     val emplng: String,
     val enableInsuranceBusiness: String,

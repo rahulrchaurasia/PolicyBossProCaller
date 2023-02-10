@@ -7,7 +7,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -20,12 +19,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.policybosscaller.BuildConfig
 import com.policyboss.policybosscaller.MyApplication
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.Utility.Product
 import com.policyboss.policybosscaller.databinding.CustomBackgroundBinding
 import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
 import java.io.ByteArrayOutputStream
@@ -33,6 +32,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URL
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,6 +40,14 @@ object Utility {
 
     //val dialog = Dialog( MyApplication.getInstance.applicationContext,R.style.Dialog)
 
+  //  val   formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss, Locale.US")
+
+    fun getFormatter() : DateFormat{
+
+
+        return SimpleDateFormat("dd-MMM-yyyy HH:mm:ss, Locale.US")
+
+    }
     fun isOverlayPermissionExist(context: Context) : Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.canDrawOverlays(context)) {
@@ -56,6 +64,79 @@ object Utility {
 
     }
 
+    fun getDate(lnDate: Date) : String{
+
+        try {
+           // var  formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss")
+            val   formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss")
+            return  formatter.format(lnDate)
+
+        }catch (ex : Exception){
+            return ""
+        }
+
+
+    }
+
+    fun compareDate(strCalculateTime : Long)  : Int{
+
+        try {
+            if(strCalculateTime.equals(0)){
+                return 1
+            }else{
+
+
+                var currerntdate = Calendar.getInstance().timeInMillis
+
+
+              return  currerntdate.compareTo(strCalculateTime)
+
+
+            }
+
+
+        }catch (ex : Exception){
+
+            return 1
+        }
+    }
+    fun compareDate1(strCalculateTime : String)  : Int{
+
+        try {
+            if(strCalculateTime.isEmpty()){
+                return 1
+            }else{
+
+                var  formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss")
+                var currerntdate = Calendar.getInstance().time
+
+                var calTime = formatter.parse(strCalculateTime)
+
+                Log.d(Constant.TAG,"Compare Diff ${currerntdate.compareTo(calTime)}")
+                return currerntdate.compareTo(calTime)
+
+
+            }
+
+
+        }catch (ex : Exception){
+
+            return 1
+        }
+    }
+
+    fun getCurrentTime() : String{
+
+        try {
+            var  formatter  =  SimpleDateFormat("dd-MMM-yyyy HH:mm:ss")
+           return formatter.format(Calendar.getInstance().time)
+
+        }catch (ex : Exception){
+            return ""
+        }
+
+
+    }
 
 
     fun isBackgroundPermissionExist(context: Context) : Boolean {
@@ -191,6 +272,33 @@ object Utility {
     }
 
 
+    open fun logout1(context: Context, action: (String, DialogInterface) -> Unit) {
+
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.apply {
+            setIcon(R.drawable.ic_email_24)
+            setTitle("title")
+            setMessage("body")
+            setCancelable(false)
+            setPositiveButton("OK") {dialog, whichButton ->
+
+                //dialog.dismiss()
+                action("Y",dialog)
+
+            }
+
+            setNegativeButton("Cancel") { dialog, whichButton ->
+                // dialog.dismiss()
+                action("N", dialog)
+            }
+//        setNeutralButton("Neutral") { _, _ ->
+//            toast("clicked neutral button")
+//        }
+        }.create().show()
+
+    }
+
+
     fun uriFromFile(context: Context, file: File): Uri {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
         {
@@ -280,6 +388,27 @@ object Utility {
 
             null
         }
+    }
+
+    fun getURL(url : String ,parent_ssid : String ,type : Product) : String{
+
+        var data = ""
+        var  VERSION_NAME = "100.0.0"
+        when(type){
+
+            Product.car ->
+                data =   url +"&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + VERSION_NAME + "&device_id=" + "&product_id=1&login_ssid=" + parent_ssid
+
+            Product.bike ->
+                data =   url +"&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + VERSION_NAME + "&device_id=" + "&product_id=10&login_ssid=" + parent_ssid
+
+
+             Product.health ->
+                data =   url +"&ip_address="  + "&mac_address=" + "&app_version=policyboss-" + VERSION_NAME + "&device_id=" + "&login_ssid=" + parent_ssid
+
+        }
+        return data
+
     }
 
    open  fun bitmapToBase64(bitmap: Bitmap): String {

@@ -11,16 +11,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import com.policyboss.policybosscaller.data.model.CallType
 import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NotifyService
-import com.policyboss.policybosscaller.OverlayDemo.CallWorkManager
 import com.policyboss.policybosscaller.OverlayDemo.OverlayService
 import kotlinx.coroutines.*
 import java.util.*
+
 
 //https://stackoverflow.com/questions/5990590/how-to-detect-phone-call-broadcast-receiver-in-android
 //https://gist.github.com/mrfoh/705b3ddeca57ac423ae2343cfd7acdb5
@@ -37,7 +35,7 @@ class CallReceiver  : BroadcastReceiver() {
     var state = 0
 
 
-
+    
     @SuppressWarnings
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -108,11 +106,10 @@ class CallReceiver  : BroadcastReceiver() {
         NotifyService.callNotification(mcontext = context!!,callType = Constant.StartCall, phoneNumber = phoneNumber)
 
 
-
             Log.d(Constant.TAG,"onIncomingCallStarted"+ phoneNumber)
             // Only For Ringing
             OverlayService.startService(
-                context = OverlayService.getServiceContext(context.applicationContext),
+                context = OverlayService.getServiceContext(context),
                 callType = CallType.INCOMMING,
                 phoneNumber = savedNumber
             )
@@ -130,11 +127,9 @@ class CallReceiver  : BroadcastReceiver() {
          Log.d(Constant.TAG,"onOutgoingCallStarted"+ phoneNumber)
             //  Outgoing call
             OverlayService.startService(
-                context = OverlayService.getServiceContext(context.applicationContext),
+                context = OverlayService.getServiceContext(context),
                 callType = CallType.OUTGOING ,
                 phoneNumber = savedNumber )
-
-
 
     }
 

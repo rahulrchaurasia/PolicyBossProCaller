@@ -50,8 +50,11 @@
         android:id="@+id/swPopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="4dp"
         android:text=""
+        android:track="@drawable/switch_track_selector"
+        android:thumb="@drawable/custom_switch"
+        android:switchMinWidth="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
 

@@ -20,6 +20,7 @@ import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.R
 import com.policyboss.policybosscaller.data.model.CallType
+import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
 import com.policyboss.policybosscaller.popup.PopUpAfterCallEndActivity
 
 
@@ -282,32 +283,30 @@ class OverlayService : Service()  {
                     intent.action.equals(Constant.SERVICE_START) -> {
 
                         SharePrefernce(context!!).savePhoneCallType(callType,phoneNumber)
+                        if(  SharePrefernce(context!!).isOverlayPopup())
+                        {
+                            if(!CustomWIndow.verifyExsist() ) {
 
 
-                        //05
-                        //05
-                        if(!CustomWIndow.verifyExsist() ) {
+                                // region Start Service
+                                // Create Forground Notification
+                                //isEndPopUpDialogExist()
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    createNotificationChannel()
+                                    showForeGroundNotification(callType, phoneNumber)
 
+                                } else {
 
-                            // region Start Service
-                            // Create Forground Notification
-                            //isEndPopUpDialogExist()
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                createNotificationChannel()
-                                showForeGroundNotification(callType, phoneNumber)
+                                    showForeGroundNotification(callType, phoneNumber)
+                                }
 
-                            } else {
-
-                                showForeGroundNotification(callType, phoneNumber)
-                            }
-
-                            CustomWIndow.openWindowPopUp(
-                                this.applicationContext,
-                                callType = callType,
-                                PhoneNumber = phoneNumber
-                            )
-                        }else{}
-
+                                CustomWIndow.openWindowPopUp(
+                                    this.applicationContext,
+                                    callType = callType,
+                                    PhoneNumber = phoneNumber
+                                )
+                            }else{}
+                        } else { }
 
 
                         //region Comment
@@ -345,12 +344,17 @@ class OverlayService : Service()  {
 
                         //
 
-                        stopSelf()
+                        //stopSelf()       // Stop the Service
 
                         CustomWIndow.close(context!!)    // Window CustomPopup is Closed
 
 
-                        Handler(Looper.getMainLooper()).post{          //  Dialog Open After Custom Dialog
+//                        Handler(Looper.getMainLooper()).post{          //  Dialog Open After Custom Dialog
+//
+//
+//                        }
+
+                        Handler(Looper.getMainLooper()).postDelayed({
 
                             startActivity(
                                 Intent(
@@ -364,8 +368,8 @@ class OverlayService : Service()  {
 
 
                             )
-                        }
 
+                        },700)
 
                         //endregion
                     }
@@ -400,7 +404,7 @@ class OverlayService : Service()  {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopSelf()
+       // stopSelf()
     }
 
 

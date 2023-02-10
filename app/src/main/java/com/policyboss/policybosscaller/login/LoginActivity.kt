@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.jetpackdemo.RetrofitHelper
+import com.policyboss.policybosscaller.RetrofitHelper
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NetworkUtils
 import com.example.policybosscaller.Utility.Utility
@@ -149,7 +149,7 @@ class LoginActivity : BaseActivity() {
     private fun init(){
 
          dialog = Dialog(this@LoginActivity,R.style.Dialog)
-        var loiginRepository = LoginRepository(this@LoginActivity,RetrofitHelper.retrofitCallerApi)
+        var loiginRepository = LoginRepository(this@LoginActivity, RetrofitHelper.retrofitCallerApi)
         var viewModelFactory = LoginViewModelFactory(loiginRepository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
 
@@ -175,7 +175,7 @@ class LoginActivity : BaseActivity() {
         return blnCheck
     }
 
-    override fun showDialog(msg: String){
+     fun showDialog(msg: String){
 
         if(!dialog.isShowing) {
             val dialogLoadingBinding = DialogLoadingBinding.inflate(layoutInflater)
@@ -190,7 +190,7 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    override fun cancelDialog(){
+     fun cancelDialog(){
 
         if(dialog.isShowing){
 

@@ -1,5 +1,4 @@
-package com.example.jetpackdemo.MVVMDemo.Data.DashboardData
-
+package  com.policyboss.policybosscaller.data.model.DashboardData
 
 
 

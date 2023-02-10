@@ -1,7 +1,6 @@
-package com.example.jetpackdemo
+package com.policyboss.policybosscaller
 
-import com.example.jetpackdemo.LoginModule.API.APIService
-
+import com.policyboss.policybosscaller.data.api.APIService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

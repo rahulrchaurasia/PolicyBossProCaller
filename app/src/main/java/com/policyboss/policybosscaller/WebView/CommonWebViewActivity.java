@@ -1,5 +1,6 @@
 package com.policyboss.policybosscaller.WebView;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.policyboss.policybosscaller.BaseActivity;
 import com.policyboss.policybosscaller.Home.HomeActivity;
 import com.policyboss.policybosscaller.R;
+import com.policyboss.policybosscaller.databinding.ProgressdialogLoadingBinding;
 
 import java.io.File;
 
@@ -70,8 +73,8 @@ public class CommonWebViewActivity extends BaseActivity {
             "android.permission.READ_EXTERNAL_STORAGE"
 
     };
-
-
+    CountDownTimer countDownTimer;
+    Dialog showDialog ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +92,11 @@ public class CommonWebViewActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(title);
 
+        showDialog = new Dialog(CommonWebViewActivity.this,R.style.Dialog);
 
         if (isNetworkConnected()) {
             settingWebview();
+            startCountDownTimer();
 
         } else{
             Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
@@ -104,6 +109,25 @@ public class CommonWebViewActivity extends BaseActivity {
 
     }
 
+    private void startCountDownTimer() {
+        countDownTimer = new CountDownTimer(20000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+                //here you can have your logic to set text to edittext
+            }
+
+            public void onFinish() {
+                try {
+                    cancelDialogMain();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
+        countDownTimer.start();
+    }
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -135,7 +159,7 @@ public class CommonWebViewActivity extends BaseActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 // TODO show you progress image
                 if (isActive)
-                    showDialog("");
+                    showDialogMain();
                 // new ProgressAsync().execute();
                 super.onPageStarted(view, url, favicon);
             }
@@ -143,7 +167,7 @@ public class CommonWebViewActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // TODO hide your progress image
-                cancelDialog();
+                cancelDialogMain();
                 super.onPageFinished(view, url);
             }
 
@@ -312,5 +336,55 @@ public class CommonWebViewActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isActive = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActive = false;
+        if (countDownTimer != null)
+            countDownTimer.cancel();
+    }
+
+    private void showDialogMain( ){
+
+        try {
+            if(! CommonWebViewActivity.this.isFinishing()){
+
+                if(!showDialog.isShowing()) {
+                    ProgressdialogLoadingBinding dialogLoadingBinding = ProgressdialogLoadingBinding.inflate(getLayoutInflater());
+                    showDialog.setContentView(dialogLoadingBinding.getRoot());
+
+                    showDialog.setCancelable(false);
+                    showDialog.show();
+                }
+            }
+        }catch (Exception e){
+
+            showDialog.dismiss();
+        }
+
+
+    }
+
+    private void cancelDialogMain() {
+        try{
+            if (showDialog != null) {
+                showDialog.dismiss();
+
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            showDialog.dismiss();
+        }
+    }
+
 
 }

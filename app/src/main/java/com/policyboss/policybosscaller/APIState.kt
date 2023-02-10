@@ -29,7 +29,7 @@ sealed class APIState<T> ( val data: T? = null,
 //    class Empty<T>(data: T) : APIStatePract<T>(data)
 //}
 
-// Old  : Unable to handle Empty {Best for live Data}
+ //Old  : Unable to handle Empty {Best for live Data}
 //sealed class NetworkResult1<T> {
 //    data class Loading<T>(val isLoading: Boolean) : NetworkResult<T>()
 //    data class Success<T>(val data: T) : NetworkResult<T>()

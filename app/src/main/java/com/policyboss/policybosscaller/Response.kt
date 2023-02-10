@@ -1,4 +1,4 @@
-package com.example.jetpackdemo
+package com.policyboss.policybosscaller
 
 sealed class Response <T>(val data : T? = null, val errorMessage: String? = null)
 {

@@ -1,24 +1,28 @@
 package com.policyboss.policybosscaller.Home.fragment
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.CompoundButton.OnCheckedChangeListener
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdemo.RetrofitHelper
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+
+import com.example.policybosscaller.Prefrence.SharePrefernce
+import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.BaseFragment
+
 import com.policyboss.policybosscaller.Home.HomeViewModel
 import com.policyboss.policybosscaller.Home.HomeViewModelFactory
-import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.RetrofitHelper
+import com.policyboss.policybosscaller.data.db.database.CallerDatabase
+import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
 import com.policyboss.policybosscaller.data.repository.HomeRepository
-import com.policyboss.policybosscaller.databinding.FragmentHomeBinding
 import com.policyboss.policybosscaller.databinding.FragmentSettingBinding
+
 
 
 class SettingFragment : BaseFragment() {
@@ -27,6 +31,9 @@ class SettingFragment : BaseFragment() {
     lateinit var layout: View
     lateinit var viewModel: HomeViewModel
     private val binding get() = _binding!!
+    private lateinit var  prefernce : SharePrefernce
+    private var constantEntity: ConstantEntity? = null
+
 
     private var switchListener : CompoundButton.OnCheckedChangeListener? = null
 
@@ -50,25 +57,46 @@ class SettingFragment : BaseFragment() {
         layout = binding.root
 
         init()
+
         getSwitchListener()
         setListener()
+      //  observe()
+       // viewLifecycleOwner.lifecycleScope.launch {
+
+//            viewModel.getUserConstant()
+//            Log.d(Constant.TAG,"User Constatnt Data"+ viewModel.constantList.toString())
+
+       // }
 
     }
 
     fun init(){
 
-        var repository = HomeRepository(requireActivity(), RetrofitHelper.retrofitCallerApi)
+
+        var demoDatabase = CallerDatabase.getDatabase(requireContext().applicationContext)
+        var repository = HomeRepository( RetrofitHelper.retrofitCallerApi,demoDatabase)
         var viewModelFactory = HomeViewModelFactory(requireActivity(),repository)
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(HomeViewModel::class.java)
 
+       prefernce = SharePrefernce(requireContext())
 
+        // region Cpmmt For Demo
+//        val calculatedtTime = Calendar.getInstance()
+//        calculatedtTime.add(Calendar.MINUTE, + 1)
+//
+//        SharePrefernce(requireContext()).saveOpenBootTime(calculatedtTime.timeInMillis)
+//
+//        Log.d(Constant.TAG,"Calaculated Time  ${Utility.getDate(calculatedtTime.time) }")
+//        Log.d(Constant.TAG,"current Time  ${Utility.getCurrentTime()}")
 
+        //endregion
     }
+
 
     fun setListener(){
 
         binding.swPopup.setOnCheckedChangeListener (null);
-        binding.swPopup.setChecked (true);
+        binding.swPopup.setChecked (prefernce.isOverlayPopup());
         binding.swPopup.setOnCheckedChangeListener (switchListener);
     }
 
@@ -78,13 +106,16 @@ class SettingFragment : BaseFragment() {
 
         override fun onCheckedChanged(viewButton: CompoundButton?, isChecked: Boolean) {
                 if(isChecked){
-                   // viewButton!!.setBackgroundResource(R.color.orange_button)
-                    //showAlert("checked")
-                    viewModel.saveOverlayStatus(true)
+
+                   // viewModel.saveOverlayStatus(true)
+                    prefernce.saveOverlayDialogStatus(true)
+
+
                 }else{
-                   // showAlert("Not checked")
+
                    // viewButton!!.setBackgroundResource(R.color.red_custom)
-                    viewModel.saveOverlayStatus(false)
+                   // viewModel.saveOverlayStatus(false)
+                    prefernce.saveOverlayDialogStatus(false)
                 }
 
             }
@@ -92,6 +123,23 @@ class SettingFragment : BaseFragment() {
 
         }
 
+    }
+
+    private fun observe(){
+
+//        viewModel.constantData.observe(viewLifecycleOwner){ constantEntity ->
+//
+//            constantEntity?.let {
+//
+//                this.constantEntity = it.get(0)
+//                Log.d(Constant.TAG,"" +it[0].FBAId +"\n Car "+ it[0].FourWheelerUrl
+//                        + " \n Health" + it[0].healthurl
+//                        + " \n Bike" + it[0].TwoWheelerUrl
+//                )
+//            }
+//
+//
+//        }
     }
 
 

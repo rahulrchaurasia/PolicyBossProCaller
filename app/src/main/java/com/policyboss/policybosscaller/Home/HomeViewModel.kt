@@ -2,25 +2,49 @@ package com.policyboss.policybosscaller.Home
 
 import android.content.Context
 import android.util.Log
+import androidx.datastore.preferences.protobuf.Empty
+import androidx.datastore.preferences.protobuf.NullValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.APIState
+import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
 import com.policyboss.policybosscaller.data.repository.HomeRepository
 import com.policyboss.policybosscaller.data.response.ConstantDataResponse
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : ViewModel(){
 
 
+     var _constantData = MutableLiveData<List<ConstantEntity>>()
+
+    val constantData : LiveData<List<ConstantEntity>>
+        get() = _constantData
+
+    init {
+
+       // constantLiveData.postValue(homeRepository.userConstantEntity)
+        viewModelScope.launch{
+            homeRepository.getUserConstantList().collect{ item ->
+
+                _constantData.postValue(item)
+
+            }
+        }
+
+    }
+
     private val userConstantMutableStateFlow  : MutableStateFlow<APIState<ConstantDataResponse>> =  MutableStateFlow<APIState<ConstantDataResponse>>(
         APIState.Empty())
 
     val UserConstantStateFlow : StateFlow<APIState<ConstantDataResponse>>
         get() = userConstantMutableStateFlow
+
 
 
 
@@ -48,7 +72,7 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
         }
 
 
-     fun getUserConstant()   =  viewModelScope.launch{
+     fun saveUserConstant()   =  viewModelScope.launch{
 
        // var fbaID  = String()
 
@@ -61,8 +85,9 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
 
 
              try {
+                 userConstantMutableStateFlow.value = APIState.Loading()
 
-                 homeRepository.getUserConstant(body)
+                 homeRepository.saveUserConstant(body)
 
                      .catch { ex ->
 
@@ -107,4 +132,8 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
 
 
     }
+
+
+
+
 }

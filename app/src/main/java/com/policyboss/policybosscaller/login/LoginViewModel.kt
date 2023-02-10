@@ -11,6 +11,7 @@ import com.policyboss.policybosscaller.data.repository.LoginRepository
 import com.policyboss.policybosscaller.data.response.ConstantDataResponse
 import com.policyboss.policybosscaller.data.response.LoginResponse
 import com.utility.finmartcontact.core.requestentity.LoginRequestEntity
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -28,6 +29,7 @@ class LoginViewModel (var loginRepository: LoginRepository) : ViewModel(){
 
 
     fun getLoginUsingFlow(loginRequestEntity: LoginRequestEntity) = viewModelScope.launch {
+
 
         loginMutableStateFlow.value = APIState.Loading()
 

@@ -1,16 +1,22 @@
 package com.policyboss.policybosscaller.Home
 
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.*
-
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.policybosscaller.Utility.Constant
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.policyboss.policybosscaller.APIState
 import com.policyboss.policybosscaller.BaseActivity
-
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.RetrofitHelper
+import com.policyboss.policybosscaller.data.db.database.CallerDatabase
+import com.policyboss.policybosscaller.data.repository.HomeRepository
 import com.policyboss.policybosscaller.databinding.ActivityHomeBinding
+import com.policyboss.policybosscaller.databinding.ProgressdialogLoadingBinding
 import kotlinx.coroutines.launch
 
 
@@ -21,10 +27,7 @@ class HomeActivity : BaseActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var viewModel: HomeViewModel
-
-
-
-
+    lateinit var showDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,6 +38,8 @@ class HomeActivity : BaseActivity() {
 
         setSupportActionBar(binding.toolbar) // bind Toolbar to Activity
         supportActionBar?.hide()
+
+        showDialog = Dialog(this@HomeActivity, R.style.Dialog)
 
         init()
 
@@ -49,33 +54,90 @@ class HomeActivity : BaseActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
 
-
-        lifecycleScope.launch {
-
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-//                viewModel.getFBAID().collect{
-//
-//                    val fbaid = it
-//                    Log.d(Constant.TAG ,"" + fbaid)
-//
-//                }
-
-            }
-        }
+        viewModel.saveUserConstant()
+        getUserConstantData()
 
     }
 
     private fun init(){
 
 
-      //  var loiginRepository = LoginRepository(this@HomeActivity, RetrofitHelper.retrofitLoginApi)
-//        var viewModelFactory = HomeViewModelFactory(this@HomeActivity)
-//        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
+        var demoDatabase = CallerDatabase.getDatabase(this@HomeActivity.applicationContext)
+        var repository = HomeRepository(RetrofitHelper.retrofitCallerApi,demoDatabase)
+        var viewModelFactory = HomeViewModelFactory(this@HomeActivity,repository)
+        viewModel = ViewModelProvider(this@HomeActivity,viewModelFactory).get(HomeViewModel::class.java)
 
 
     }
 
 
+    private fun getUserConstantData(){
+
+        lifecycleScope.launch {
+
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+                viewModel.UserConstantStateFlow.collect(){
+
+                    when(it){
+                        is APIState.Empty -> {
+                            cancelDialog()
+                        }
+                        is APIState.Failure -> {
+                            cancelDialog()
+
+                            showSnackBar(binding.root,it.errorMessage?: Constant.ErrorMessage)
+                            Log.d(Constant.TAG_Coroutine, it.errorMessage.toString())
+                        }
+                        is APIState.Loading -> {
+                            showDialog()
+                        }
+                        is APIState.Success -> {
+
+                            cancelDialog()
+                            // Log.d(Constant.TAG,"SUCCESS"+ it.data.toString())
+
+                            it.data?.let {
+
+                               // setData(  it.MasterData)
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun showDialog() {
+        try {
+            if (!this@HomeActivity.isFinishing()) {
+                if (!showDialog.isShowing()) {
+                    val dialogLoadingBinding: ProgressdialogLoadingBinding =
+                        ProgressdialogLoadingBinding.inflate(
+                            layoutInflater
+                        )
+                    showDialog.setContentView(dialogLoadingBinding.getRoot())
+                    showDialog.setCancelable(false)
+                    showDialog.show()
+                }
+            }
+        } catch (e: Exception) {
+            showDialog.dismiss()
+        }
+    }
+
+    private fun cancelDialog() {
+        try {
+            if (showDialog != null) {
+                showDialog.dismiss()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            showDialog.dismiss()
+        }
+    }
 
 }

@@ -31,34 +31,7 @@ open class BaseActivity : AppCompatActivity() {
     open fun toast( text: String) = Toast.makeText( this, text, Toast.LENGTH_SHORT).show()
 
 
-    open fun showDialog(msg: String = "Loading Please Wait!!"){
 
-        if(!dialog.isShowing) {
-            val dialogLoadingBinding = DialogLoadingBinding.inflate(layoutInflater)
-            dialog.setContentView(dialogLoadingBinding.root)
-            if (dialog.window != null) {
-
-                dialog.window!!.setBackgroundDrawable(ContextCompat.getDrawable(this@BaseActivity,0))
-
-            }
-            if(msg.isNotEmpty()){
-                dialogLoadingBinding.txtMessage.text = msg
-
-            }
-            dialog.setCancelable(false)
-            dialog.show()
-        }
-    }
-
-    open fun cancelDialog(){
-
-        if(dialog.isShowing){
-
-            dialog.dismiss()
-        }
-
-
-    }
 
 
 //    fun showAlert(msg : String){
