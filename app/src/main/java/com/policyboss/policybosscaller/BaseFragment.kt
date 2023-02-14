@@ -65,11 +65,7 @@ open class BaseFragment : Fragment() {
     }
 
 
-    fun showSnackBar(view : View, strMessage: String){
 
-        Snackbar.make(view, strMessage, Snackbar.LENGTH_SHORT).show()
-
-    }
 
     fun showAlert(msg : String){
 

@@ -26,6 +26,15 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
     val constantData : LiveData<List<ConstantEntity>>
         get() = _constantData
 
+
+    private val userConstantMutableStateFlow  : MutableStateFlow<APIState<ConstantDataResponse>> =  MutableStateFlow<APIState<ConstantDataResponse>>(
+        APIState.Empty())
+
+    val UserConstantStateFlow : StateFlow<APIState<ConstantDataResponse>>
+        get() = userConstantMutableStateFlow
+
+
+
     init {
 
        // constantLiveData.postValue(homeRepository.userConstantEntity)
@@ -39,12 +48,6 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
 
     }
 
-    private val userConstantMutableStateFlow  : MutableStateFlow<APIState<ConstantDataResponse>> =  MutableStateFlow<APIState<ConstantDataResponse>>(
-        APIState.Empty())
-
-    val UserConstantStateFlow : StateFlow<APIState<ConstantDataResponse>>
-        get() = userConstantMutableStateFlow
-
 
 
 
@@ -54,10 +57,6 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
     }
 
     fun getOverlayStatus() : Flow<Boolean >{
-
-//        viewModelScope.launch{
-//
-//        }
 
        return DataStoreManager(context).getOverlyStatus()
     }

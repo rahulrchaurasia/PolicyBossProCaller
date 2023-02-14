@@ -81,7 +81,7 @@
                 android:id="@+id/txtPhoneStateDtls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Required for PolicyBoss Pro Caller to identify phone calls"
+                android:text="@string/callSate_req"
                 android:textStyle="normal"
                 android:layout_marginLeft="@dimen/eight"
                 app:layout_constrainedWidth="true"
@@ -159,7 +159,7 @@
                 android:id="@+id/txtCallLogDtls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Required for PolicyBoss Pro Caller to display your call log"
+                android:text="@string/callLog_req"
                 android:textStyle="normal"
                 android:layout_marginLeft="@dimen/eight"
                 app:layout_constrainedWidth="true"
@@ -187,80 +187,80 @@
 
     <!--    /////////////////////////////-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardOverlay"
-        android:clickable="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/lightGrey"
-        app:cardCornerRadius="@dimen/twelve"
-        app:layout_constraintTop_toBottomOf="@+id/cardCallLog"
-        android:layout_marginTop="@dimen/eight">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardOverlay"-->
+<!--        android:clickable="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/lightGrey"-->
+<!--        app:cardCornerRadius="@dimen/twelve"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/cardCallLog"-->
+<!--        android:layout_marginTop="@dimen/eight">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
 
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/eight">
+<!--            android:visibility="visible"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/eight">-->
 
-            <TextView
+<!--            <TextView-->
 
-                android:id="@+id/tvOvelayInfo"
+<!--                android:id="@+id/tvOvelayInfo"-->
 
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:background="@drawable/bg_yellow"
-                android:gravity="center|center_vertical"
-                android:layout_marginTop="@dimen/twelve"
-                android:text="!"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtDisplayOverApp"
-                android:layout_width="match_parent"
-                style="@style/TextViewStyle.BannerLarge"
-                android:text="Display over apps"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/eight"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Required for PolicyBoss Pro Caller to display caller ID on the screen."
-                android:layout_marginLeft="@dimen/eight"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"
-                app:layout_constraintTop_toBottomOf="@+id/txtDisplayOverApp" />
-
-            <TextView
-                android:id="@+id/btnAllowOverlay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/eight"
-                android:text="ALLOW"
-                android:textStyle="bold"
-                android:textColor="@color/blue"
-                android:padding="@dimen/twelve"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo" />
+<!--                android:layout_width="26dp"-->
+<!--                android:layout_height="26dp"-->
+<!--                android:background="@drawable/bg_yellow"-->
+<!--                android:gravity="center|center_vertical"-->
+<!--                android:layout_marginTop="@dimen/twelve"-->
+<!--                android:text="!"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="16sp"-->
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-    </androidx.cardview.widget.CardView>
+<!--            <TextView-->
+<!--                android:id="@+id/txtDisplayOverApp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                style="@style/TextViewStyle.BannerLarge"-->
+<!--                android:text="Display over apps"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/eight"-->
+<!--                app:layout_constrainedWidth="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Required for PolicyBoss Pro Caller to display caller ID on the screen."-->
+<!--                android:layout_marginLeft="@dimen/eight"-->
+<!--                app:layout_constrainedWidth="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txtDisplayOverApp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/btnAllowOverlay"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/eight"-->
+<!--                android:text="ALLOW"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@color/blue"-->
+<!--                android:padding="@dimen/twelve"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView3"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tvOvelayInfo" />-->
+
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
     <androidx.appcompat.widget.AppCompatButton
 

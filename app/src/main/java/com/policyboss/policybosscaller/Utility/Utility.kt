@@ -241,6 +241,36 @@ object Utility {
         }.create().show()
     }
 
+    fun settingDialog(context: Context, action: (strType: String, dialog: DialogInterface) -> Unit){
+
+        val dialogBuilder = AlertDialog.Builder(context)
+
+        // set message of alert dialog
+        dialogBuilder.setMessage(context.getString(R.string.permission_required))
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // positive button text and action
+            .setPositiveButton("OPEN SETTING", DialogInterface.OnClickListener { dialog, id ->
+
+
+                action("Y" , dialog)
+
+            }).setNegativeButton("CANCEL", DialogInterface.OnClickListener{dialog, id ->
+
+                action("N" , dialog)
+
+            })
+
+
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle("AlertDialogExample")
+        // show alert dialog
+        alert.show()
+    }
+
 
 
     open fun showlogout(context: Context,title : String = "PolicyBossProCaller" ,msg : String,
@@ -272,32 +302,18 @@ object Utility {
     }
 
 
-    open fun logout1(context: Context, action: (String, DialogInterface) -> Unit) {
+    open fun noInternetDialog(context: Context) {
+        AlertDialog.Builder(context)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("No Internet")
+            .setMessage("Please check your internet connection.")
+            .setPositiveButton("CLOSE") { dialog, i ->
+                dialog.dismiss()
 
-        val alertDialog = AlertDialog.Builder(context)
-        alertDialog.apply {
-            setIcon(R.drawable.ic_email_24)
-            setTitle("title")
-            setMessage("body")
-            setCancelable(false)
-            setPositiveButton("OK") {dialog, whichButton ->
 
-                //dialog.dismiss()
-                action("Y",dialog)
 
-            }
-
-            setNegativeButton("Cancel") { dialog, whichButton ->
-                // dialog.dismiss()
-                action("N", dialog)
-            }
-//        setNeutralButton("Neutral") { _, _ ->
-//            toast("clicked neutral button")
-//        }
-        }.create().show()
-
+            }.show()
     }
-
 
     fun uriFromFile(context: Context, file: File): Uri {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)

@@ -1,19 +1,23 @@
 package com.policyboss.policybosscaller.SplashScreen
 
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.policybosscaller.Prefrence.DataStoreManager
+import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.Utility
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.SettingPage.OverlayPermissionActivity
@@ -27,6 +31,26 @@ import kotlinx.coroutines.withContext
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySplashScreenBinding
     private val SPLASH_DISPLAY_LENGTH = 1000
+
+    //region commneted broadcastReceiver
+//      val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+//        // we will receive data updates in onReceive method.
+//        override fun onReceive(context: Context?, intent: Intent) {
+//            // Get extra data included in the Intent
+//            if (intent.action != null) {
+//                if (intent.action.equals(Constant.APP_INSTALL_ACTION, ignoreCase = true)) {
+//
+//                    val Data = intent.getStringExtra(Constant.APP_INSTALL_DATA)
+//                    Log.d("AppInstallReceiver", "Caller is installed: "+ Data)
+//                }
+//
+//            }
+//
+//        }
+//    }
+//
+    //endregion
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +71,17 @@ class SplashScreenActivity : AppCompatActivity() {
     fun hasCallLogPermission() = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
 
 
+
+
+    override fun onPause() {
+        super.onPause()
+       // LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
+    }
 
     fun verifyAllPermission(){
 

@@ -35,6 +35,7 @@ class CustomBootReceiver : BroadcastReceiver() {
 
 
                 SharePrefernce(context!!).saveOpenBootTime(calculatedtTime.timeInMillis)
+              //  SharePrefernce(context!!).saveOpenBootTime1(Utility.getDate(calculatedtTime.time))
 
                 Log.d(Constant.TAG,"Calaculated Time  ${Utility.getDate(calculatedtTime.time)}")
 

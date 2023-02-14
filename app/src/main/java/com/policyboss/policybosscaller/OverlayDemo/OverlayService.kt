@@ -417,20 +417,20 @@ class OverlayService : Service()  {
 
         val notificationIntent = Intent(this, HomeActivity::class.java)
 
-        val flag = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            PendingIntent.FLAG_IMMUTABLE
-        }else {0 }
-        val pendingIntent = PendingIntent.getActivity(
-            this,
-            0, notificationIntent, flag
-        )
+//        val flag = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//            PendingIntent.FLAG_IMMUTABLE
+//        }else {0 }
+//        val pendingIntent = PendingIntent.getActivity(
+//            this,
+//            0, notificationIntent, flag
+//        )
 
         //.setContentText("${callType}: ${phoneNumber}")
 
         val notification = NotificationCompat.Builder(this, Constant.CHANNEL_ID)
             .setContentTitle("PolicyBoss Pro Caller is Enable")
             .setSmallIcon(R.drawable.ic_call_24)
-            .setContentIntent(pendingIntent)
+           // .setContentIntent(pendingIntent)
            // .setFullScreenIntent(pendingIntent,true)
             .setColor(Color.GREEN)
             .build()

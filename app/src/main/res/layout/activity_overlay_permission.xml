@@ -217,11 +217,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
 
-        android:id="@+id/btnAllowOverlay"
+        android:id="@+id/btnAllowALL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/eight"
-         android:visibility="gone"
+         android:visibility="visible"
         android:background="@drawable/round_rect_shape"
         android:padding="@dimen/four"
         android:text="ALLOW ALL"

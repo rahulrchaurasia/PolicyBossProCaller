@@ -19,7 +19,14 @@
     <string name="title_activity_test">TestActivity</string>
 
     <string name="ok">OK</string>
+    <string name="allow">ALLOW</string>
     <string name="permission_background_required">Select "No restrictions"\nAllow to run PolicyBoss Pro Caller in background. </string>
     <string name="permission_overlay_required">Required for PolicyBoss Pro Caller to display caller ID on the screen.</string>
     <string name="logout"> <b>Do you want to logout?</b> </string>
+
+    <string name="callSate_req">Required for PolicyBoss Pro Caller to identify phone calls</string>
+
+    <string name="callLog_req">Required for PolicyBoss Pro Caller to display your call log</string>
+
+    <string name="permission_required">Required Permssion to access it</string>
 </resources>

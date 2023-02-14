@@ -34,10 +34,11 @@ fun View.showSnackbar(msgId: Int, length: Int) {
     showSnackbar(context.getString(msgId), length)
 }
 
-fun View.showSnackbar(msg: String) {
+fun View.showSnackbar(view: View,msg: String) {
 
-    Snackbar.make(this, msg, Snackbar.LENGTH_SHORT).show()
+    Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
 }
+
 
 fun View.showSnackbar(msg: String, length: Int) {
     showSnackbar(msg, length, null, {})

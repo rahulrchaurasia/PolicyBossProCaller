@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.*
 import android.provider.Settings
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -40,7 +39,7 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
         binding.cardOverlay.setOnClickListener(this)
         binding.cardBackground.setOnClickListener(this)
         binding.btnInfo.setOnClickListener(this)
-       // binding.btnAllowOverlay.setOnClickListener(this)
+        binding.btnAllowALL.setOnClickListener(this)
 
         verifyOverlayAndBackgroundPermission()
 
@@ -53,13 +52,13 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
         if(isOverlayPermissionExist()){
 
-            if(isBackgroundPermissionExist()){
+               updateOverlayUI()
+                if(isBackgroundPermissionExist()){
 
-                startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
-                this@OverlayPermissionActivity.finish()
-            }else{
-                updateUI()
-            }
+                    updateAllowAll()
+                    moveToDashBoard()
+
+                }
 
 
 
@@ -67,11 +66,17 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
             layout.showSnackbar(
                 R.string.permission_overlay_required,
                 Snackbar.LENGTH_LONG,
-                R.string.ok
+                R.string.allow
             )
             {
 
-                backGroundBatteryOptimization()
+                showOverlayPermission()
+                Handler(Looper.getMainLooper()!!).postDelayed({
+
+                    startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
+                        .putExtra(Constant.IS_OVERLAYSCREEN,Constant.OVERLAY_DATA))
+
+                },1200)
             }
         }
 
@@ -83,38 +88,13 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
         if(result.resultCode ==  RESULT_OK) {
 
             //startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java))
-
+            updateBackGroundUI()
             if(isOverlayPermissionExist()){
 
+                updateOverlayUI()
+                updateAllowAll()
+                moveToDashBoard()
 
-                lifecycleScope.launch {
-
-                    repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        DataStoreManager(this@OverlayPermissionActivity).getFBAID().collect{
-
-                            withContext(Dispatchers.Main){
-                                if(it.length> 0 && !it.equals("0")){
-                                    startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                                    this@OverlayPermissionActivity.finish()
-                                }else{
-                                    startActivity(Intent(this@OverlayPermissionActivity, LoginActivity::class.java)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-                                    this@OverlayPermissionActivity.finish()
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-            }else{
-                updateBackGroundUI()
             }
 
 
@@ -126,7 +106,7 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
             layout.showSnackbar(
                 R.string.permission_background_required,
                 Snackbar.LENGTH_LONG,
-                R.string.ok
+                R.string.allow
             )
             {
 
@@ -137,6 +117,35 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
 
 
+    }
+
+    fun moveToDashBoard(){
+
+        lifecycleScope.launch {
+
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                DataStoreManager(this@OverlayPermissionActivity).getFBAID().collect{
+
+                    withContext(Dispatchers.Main){
+                        if(it.length> 0 && !it.equals("0")){
+                            startActivity(Intent(this@OverlayPermissionActivity, HomeActivity::class.java)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                            this@OverlayPermissionActivity.finish()
+                        }else{
+                            startActivity(Intent(this@OverlayPermissionActivity, LoginActivity::class.java)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                            this@OverlayPermissionActivity.finish()
+                        }
+
+                    }
+
+                }
+            }
+        }
     }
 
     override fun onClick(viw: View?) {
@@ -169,6 +178,29 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
             }
 
+            binding.btnAllowALL.id ->{
+
+                if(!isOverlayPermissionExist()){
+
+                    showOverlayPermission()
+                    Handler(Looper.getMainLooper()!!).postDelayed({
+
+                        startActivity(Intent(this, OverlayPopupPermissionActivity::class.java)
+                            .putExtra(Constant.IS_OVERLAYSCREEN,Constant.OVERLAY_DATA))
+
+                    },1200)
+                }else if(!isBackgroundPermissionExist()){
+
+                    backGroundBatteryOptimization()
+                }else{
+
+                    moveToDashBoard()
+                }
+
+
+
+            }
+
 
         }
     }
@@ -183,28 +215,21 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
         if(isOverlayPermissionExist()){
 
-            updateUI()
+            updateOverlayUI()
         }
         if(isBackgroundPermissionExist()){
             updateBackGroundUI()
         }
     }
 
-    fun updateUI(){
+    fun updateOverlayUI(){
 
         Handler(Looper.myLooper()!!).postDelayed({
 
-
-
-//            binding.btnAllowOverlay.background = ContextCompat.getDrawable(this@OverlayPermissionActivity, R.drawable.round_rect_blue_shape)
-//
-//            binding.btnAllowOverlay.setTextColor(ContextCompat.getColor(this@OverlayPermissionActivity, R.color.white))
-//            binding.btnAllowOverlay.text = "CONTINUE"
-//            binding.btnAllowOverlay.textSize = 16f
-
-
             binding.tvOvelayInfo.setImageResource(R.drawable.circular_checklayer)
             binding.txtAllowOverlay.text = "ALLOWED"
+
+            binding.btnAllowALL.text = "NEXT"
 
         },400)
 
@@ -220,10 +245,27 @@ class OverlayPermissionActivity :  BaseActivity() , View.OnClickListener  {
 
             binding.tvBackgroundInfo.setImageResource(R.drawable.circular_checklayer)
             binding.txtAllowbackground.text = "ALLOWED"
+            binding.btnAllowALL.text = "NEXT"
         },400)
 
       //  binding.btnCancel.visibility = View.GONE
 
+
+
+    }
+
+    fun updateAllowAll(){
+
+
+        Handler(Looper.myLooper()!!).postDelayed({
+
+            binding.btnAllowALL.background = ContextCompat.getDrawable(this@OverlayPermissionActivity, R.drawable.round_rect_blue_shape)
+
+            binding.btnAllowALL.setTextColor(ContextCompat.getColor(this@OverlayPermissionActivity, R.color.white))
+            binding.btnAllowALL.text = "CONTINUE"
+            binding.btnAllowALL.textSize = 16f
+
+        },400)
 
 
     }

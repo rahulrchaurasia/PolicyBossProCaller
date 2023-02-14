@@ -2,24 +2,26 @@ package com.policyboss.policybosscaller.SettingPage
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CallLog
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.Utility
+import com.example.policybosscaller.Utility.showSnackbar
+import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.BaseActivity
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.R
@@ -29,6 +31,7 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
     private lateinit var binding : ActivitySettingBinding
     private var isReadPhoneState = false
     private var isReadCallLog = false
+    private lateinit var layout : View
     // lateinit var CallLogContracts : ActivityResultLauncher<String>
 
 
@@ -37,7 +40,7 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
 
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        layout = binding.root
         init()
         setting()
 
@@ -81,6 +84,15 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
         } else {
             Log.i("DEBUG", "permission denied")
             binding.tvCallLogInfo.setImageDrawable(ContextCompat.getDrawable(this@SettingActivity, R.drawable.circular_exclaimlayer))
+
+            layout.showSnackbar(
+                R.string.callLog_req,
+                Snackbar.LENGTH_SHORT,
+                R.string.allow){
+
+                Utility.settingDialog(context = this@SettingActivity, ::settingDialogAction)
+
+            }
         }
     }
 
@@ -89,18 +101,49 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
             isGranted ->
         // Do something if permission granted
         if (isGranted) {
-            Log.i("DEBUG", "permission granted")
+
             // binding.tvCallLogInfo.setImageDrawable(ContextCompat.getDrawable(this@SettingActivity, R.drawable.circular_checklayer))
             setPhoneStateUI()
             verifyAllPermission()
 
         } else {
-            Log.i("DEBUG", "permission denied")
+
             binding.tvPhoneStateInfo.setImageDrawable(ContextCompat.getDrawable(this@SettingActivity, R.drawable.circular_exclaimlayer))
+            layout.showSnackbar(
+                R.string.callSate_req,
+                Snackbar.LENGTH_LONG,
+                R.string.allow){
+
+                Utility.settingDialog(context = this@SettingActivity, ::settingDialogAction)
+
+            }
 
         }
     }
 
+
+
+    fun settingDialogAction( strType : String, dialog : DialogInterface){
+
+
+        when(strType){
+
+            "Y" -> {
+
+                dialog.dismiss()
+                Utility.openSetting(context =this)
+
+            }
+
+            "N" -> {
+
+                dialog.dismiss()
+
+            }
+
+        }
+
+    }
 
 
     //endregion
@@ -142,13 +185,21 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
 
     fun init(){
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(this)) {
 
-                binding.btnAllowOverlay.text = "ALLOW"
-            }else{
-                binding.btnAllowOverlay.text = "Done"
-            }
+        if (hasReadPhonePermission() == PackageManager.PERMISSION_GRANTED
+            && hasCallLogPermission() == PackageManager.PERMISSION_GRANTED){
+
+
+            setAllowButton()
+            setPhoneStateUI()
+            setCallLogUI()
+        }
+
+        else if(hasReadPhonePermission() == PackageManager.PERMISSION_GRANTED){
+            setPhoneStateUI()
+        }
+        else if(hasCallLogPermission() == PackageManager.PERMISSION_GRANTED){
+            setCallLogUI()
         }
 
     }
@@ -157,7 +208,7 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
 
         binding.cardPhoneState.setOnClickListener(this)
         binding.cardCallLog.setOnClickListener(this)
-        binding.cardOverlay.setOnClickListener(this)
+
         binding.btnContinue.setOnClickListener(this)
     }
 
@@ -220,9 +271,11 @@ class SettingActivity : BaseActivity() , View.OnClickListener {
                         Utility.isBackgroundPermissionExist(this@SettingActivity)){
 
                         startActivity(Intent(this, HomeActivity::class.java))
+                        this.finish()
                     }else{
 
                         startActivity(Intent(this, OverlayPermissionActivity::class.java))
+                        this.finish()
                     }
 
 

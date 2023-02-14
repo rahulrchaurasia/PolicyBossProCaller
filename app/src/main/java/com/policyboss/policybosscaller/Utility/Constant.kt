@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.policyboss.policybosscaller.BuildConfig
-import com.policyboss.policybosscaller.Utility.Product
 
 
 object Constant {
@@ -82,6 +81,10 @@ object Constant {
     const val IsOverlayShow = "ISOverlayDisplayShow"
 
     const val CALL_RECEIVER = "SHOW_CALL_Detail"
+
+    const val APP_INSTALL_ACTION = "APP_INSTALL_ACTION"
+
+    const val APP_INSTALL_DATA = "APP_INSTALL_DATA"
 
 
 

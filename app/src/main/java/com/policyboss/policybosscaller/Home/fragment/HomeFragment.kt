@@ -7,22 +7,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-
 import coil.load
 import coil.transform.RoundedCornersTransformation
-
-
 import com.example.policybosscaller.Prefrence.DataStoreManager
 import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
+import com.example.policybosscaller.Utility.NetworkUtils
 import com.example.policybosscaller.Utility.Utility
-import com.policyboss.policybosscaller.*
+import com.example.policybosscaller.Utility.showSnackbar
+import com.google.android.material.snackbar.Snackbar
+import com.policyboss.policybosscaller.APIState
+import com.policyboss.policybosscaller.BaseFragment
 import com.policyboss.policybosscaller.Home.HomeViewModel
 import com.policyboss.policybosscaller.Home.HomeViewModelFactory
+import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.RetrofitHelper
 import com.policyboss.policybosscaller.data.db.database.CallerDatabase
 import com.policyboss.policybosscaller.data.model.DashboardData.ConstantEntity
 import com.policyboss.policybosscaller.data.repository.HomeRepository
@@ -68,17 +72,23 @@ class HomeFragment : BaseFragment() {
 
         setListener()
 
-        observe()
 
-        // region commented We apply on Activity so All fragment can use it
+        if (!NetworkUtils.isNetworkAvailable(requireContext())){
 
-//        viewModel.saveUserConstant()
-//        getUserConstantData()
-        //endregion
+            Utility.noInternetDialog(requireContext())
+
+
+        }else{
+            viewModel.saveUserConstant()
+            getUserConstantData()
+        }
+
 
 
 
     }
+
+
 
     fun init(){
 
@@ -159,20 +169,6 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun observe(){
-
-        viewModel.constantData.observe(viewLifecycleOwner){ constantEntity ->
-
-            constantEntity?.let {
-
-                this.constantEntity = it.get(0)
-
-                setData(it.get(0))
-            }
-
-
-        }
-    }
 
 
     private fun setData( entity: ConstantEntity?){
@@ -191,7 +187,7 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    // region NOT IN USED
+
     private fun getUserConstantData(){
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -207,7 +203,7 @@ class HomeFragment : BaseFragment() {
                         is APIState.Failure -> {
                             cancelDialog()
 
-                            showSnackBar(binding.root,it.errorMessage?: Constant.ErrorMessage)
+                            layout.showSnackbar(layout,it.errorMessage?: Constant.ErrorMessage)
                             Log.d(Constant.TAG_Coroutine, it.errorMessage.toString())
                         }
                         is APIState.Loading -> {

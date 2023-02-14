@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 //http://horizon.policyboss.com:5000/posps/dsas/view/8774
 class HomeActivity : BaseActivity() {
 
-    private lateinit var binding : ActivityHomeBinding
+     lateinit var binding : ActivityHomeBinding
     private lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var viewModel: HomeViewModel
@@ -54,8 +54,8 @@ class HomeActivity : BaseActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
 
-        viewModel.saveUserConstant()
-        getUserConstantData()
+//        viewModel.saveUserConstant()
+//        getUserConstantData()
 
     }
 
@@ -70,6 +70,8 @@ class HomeActivity : BaseActivity() {
 
     }
 
+
+    //region Not IN USED
 
     private fun getUserConstantData(){
 
@@ -139,5 +141,7 @@ class HomeActivity : BaseActivity() {
             showDialog.dismiss()
         }
     }
+
+    //endregion
 
 }

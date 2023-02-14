@@ -151,10 +151,10 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
 
-                    android:paddingBottom="@dimen/four">
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_bottom_white_currve"
+                    android:paddingBottom="@dimen/eight">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -214,6 +214,7 @@
 
                 <LinearLayout
                     android:id="@+id/lyOther"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

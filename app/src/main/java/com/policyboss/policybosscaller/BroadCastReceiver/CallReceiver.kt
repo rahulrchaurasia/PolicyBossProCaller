@@ -15,6 +15,7 @@ import com.policyboss.policybosscaller.data.model.CallType
 import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NotifyService
+import com.example.policybosscaller.Utility.Utility
 import com.policyboss.policybosscaller.OverlayDemo.OverlayService
 import kotlinx.coroutines.*
 import java.util.*
@@ -65,14 +66,10 @@ class CallReceiver  : BroadcastReceiver() {
         //  ******************* LogiC ******************************************
 
         if(!savedNumber.isNullOrEmpty()){
-            //if (!stateStr.equals(mLastState)) {
-              //  mLastState = stateStr;
-                //Log.e(Constant.TAG, stateStr)
 
              if (stateStr == TelephonyManager.EXTRA_STATE_IDLE) {
                 state = TelephonyManager.CALL_STATE_IDLE
 
-                // OverlayService.stopService()
 
             }
              else  if (stateStr == TelephonyManager.EXTRA_STATE_RINGING) {
@@ -83,14 +80,16 @@ class CallReceiver  : BroadcastReceiver() {
              else   if (stateStr == TelephonyManager.EXTRA_STATE_OFFHOOK) {
                         state = TelephonyManager.CALL_STATE_OFFHOOK
 
-                // OverlayService.startService(OverlayService.getServiceContext(mcontext = context!!),callType = CallType.OUTGOING , phoneNumber = savedNumber )
 
              }
 
+           if(Utility.compareDate( SharePrefernce(context!!).getBootCalculatedTime()) == 1) {
+
                onCallStateChanged(context, state, savedNumber)
+            }
 
 
-            //}
+
         }
 
     }
