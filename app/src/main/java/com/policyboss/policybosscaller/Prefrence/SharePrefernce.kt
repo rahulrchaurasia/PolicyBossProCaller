@@ -23,6 +23,7 @@ open class SharePrefernce (context: Context)  {
     val PhoneNumerKEY = "PhoneNumerKEY"
     val CallTypeKey = "CallTypeKey"
     val WindowDialogStatus ="WindowDialogStattus"
+    val SmsACTIVE ="smsACTIVE"
     val BootTimeKey ="BootTimeKey"
 
     init {
@@ -71,6 +72,16 @@ open class SharePrefernce (context: Context)  {
     }
 
 
+    open fun saveSmSActivation(bln: Boolean ){
+
+        editor.putBoolean(SmsACTIVE,bln)
+        editor.commit()
+    }
+    open fun isSmsACTIVE(): Boolean {
+
+        return sharedPreferences.getBoolean(SmsACTIVE, true)
+    }
+
     //open fun getInstance() : ApplicationPersistance()
 
     open fun saveLastState(lastState : Int){
@@ -85,6 +96,11 @@ open class SharePrefernce (context: Context)  {
         return sharedPreferences.getInt(LastStateKEY, 0)
     }
 
+    open fun clearLastState(){
+
+        editor.remove(LastStateKEY)
+        editor.commit()
+    }
 
     open fun saveIsCallInComming(isInComingCall: Boolean) {
         editor.putBoolean(isInComingCallKEY, isInComingCall)

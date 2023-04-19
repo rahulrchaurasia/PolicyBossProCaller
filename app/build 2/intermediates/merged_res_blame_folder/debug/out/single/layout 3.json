@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_test.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_test.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_pop_up_after_call_end_old.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_pop_up_after_call_end_old.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_setting.xml",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_setting.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_splash_screen.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_splash_screen.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_home.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_home.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_overlay_popup_permission.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_overlay_popup_permission.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_second2.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_second2.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_base.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_base.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_common_web_view.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_common_web_view.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/content_main.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/content_main.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_base.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_base.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_home.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/popup_window.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/popup_window.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_setting.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_setting.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/progressdialog_loading.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/progressdialog_loading.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_pop_up_after_call_end.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_pop_up_after_call_end.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_main.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_overlay_permission.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_overlay_permission.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/content_login.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/content_login.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_setting.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_setting.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/content_test.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/content_test.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/dialog_loading.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/dialog_loading.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_contact.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_contact.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/activity_login.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/custom_background.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/custom_background.xml"
+    },
+    {
+        "merged": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-mergeDebugResources-56:/layout/fragment_first2.xml",
+        "source": "/Users/rahulchaurasia/.gradle/daemon/7.4/com.policyboss.policybosscaller.app-main-59:/layout/fragment_first2.xml"
+    }
+]

@@ -21,34 +21,14 @@ class AppInstallReceiver : BroadcastReceiver() {
            if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED)) {
                // App installed
 
-               // Todo : Firing Local BroadCase
-               val splashIntent = Intent(Constant.APP_INSTALL_ACTION)
-               splashIntent.putExtra(
-                   Constant.APP_INSTALL_DATA,"INSTALLED"
-               )
-
-               LocalBroadcastManager.getInstance(context!!).sendBroadcast(splashIntent)
-
-
-               CoroutineScope(SupervisorJob()).launch(Dispatchers.IO) {
-                   try {
-                       Log.d("AppInstallReceiver", "App installed: $packageName")
-                   } finally {
-                       Log.d("AppInstallReceiver", "Caller App installed")
-                   }
-               }
+               Log.d("AppInstallReceiver", "App installed: $packageName")
 
 
            } else if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED)) {
                // App uninstalled
 
-               CoroutineScope(SupervisorJob()).launch(Dispatchers.IO) {
-                   try {
-                       Log.d("AppInstallReceiver", "App uninstalled: $packageName")
-                   } finally {
-                       Log.d("AppInstallReceiver", "Caller App uninstalled")
-                   }
-               }
+               Log.d("AppInstallReceiver", "App uninstalled: $packageName")
+
            }
        }
 

@@ -59,4 +59,38 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
 
 
+    <TextView
+        android:id="@+id/txtTitle2"
+        style="@style/TextViewStyle.BannerLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Sms Service"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swPopup" />
+
+    <TextView
+        android:id="@+id/txtDesc2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/eight"
+        android:layout_marginEnd="12dp"
+        android:text="we can Active/De-Active sending 'Default SMS' to user after call end"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/swSms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle2" />
+
+    <Switch
+        android:id="@+id/swSms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:switchMinWidth="40dp"
+        android:text=""
+        android:thumb="@drawable/custom_switch"
+        android:track="@drawable/switch_track_selector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

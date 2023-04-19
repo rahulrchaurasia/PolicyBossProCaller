@@ -2,29 +2,31 @@ package com.policyboss.policybosscaller.login
 
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.policyboss.policybosscaller.RetrofitHelper
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.NetworkUtils
-import com.example.policybosscaller.Utility.Utility
 import com.example.policybosscaller.Utility.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.policybosscaller.APIState
 import com.policyboss.policybosscaller.BaseActivity
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.RetrofitHelper
 import com.policyboss.policybosscaller.data.repository.LoginRepository
 import com.policyboss.policybosscaller.databinding.ActivityLoginBinding
 import com.policyboss.policybosscaller.databinding.DialogLoadingBinding
 import com.utility.finmartcontact.core.requestentity.LoginRequestEntity
 import kotlinx.coroutines.launch
+
 
 class LoginActivity : BaseActivity() {
 
@@ -108,7 +110,6 @@ class LoginActivity : BaseActivity() {
 
 
 
-
             if (!NetworkUtils.isNetworkAvailable(this@LoginActivity)){
 
                 showSnackBar(binding.root,Constant.NetworkError)
@@ -137,6 +138,8 @@ class LoginActivity : BaseActivity() {
 
 
             }
+
+
 
 
 
@@ -174,6 +177,8 @@ class LoginActivity : BaseActivity() {
 
         return blnCheck
     }
+
+
 
      fun showDialog(msg: String){
 

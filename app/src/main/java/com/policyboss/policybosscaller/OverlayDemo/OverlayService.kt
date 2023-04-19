@@ -19,9 +19,13 @@ import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.policyboss.policybosscaller.Home.HomeActivity
 import com.policyboss.policybosscaller.R
+import com.policyboss.policybosscaller.data.db.database.CallerDatabase
 import com.policyboss.policybosscaller.data.model.CallType
 import com.policyboss.policybosscaller.popup.OverlayPopupPermissionActivity
 import com.policyboss.policybosscaller.popup.PopUpAfterCallEndActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /******************* Overlay Demo ******************************************/
@@ -349,10 +353,43 @@ class OverlayService : Service()  {
                         CustomWIndow.close(context!!)    // Window CustomPopup is Closed
 
 
-//                        Handler(Looper.getMainLooper()).post{          //  Dialog Open After Custom Dialog
+                        //region check Login or not
+//                        CoroutineScope(Dispatchers.Default).launch {
+//
+//                            var demoDatabase = CallerDatabase.getDatabase(context!!)
+//
+//                            val Constantlist = demoDatabase.constantDao().getConstantData()
+//
+//                            if(Constantlist.size > 0){
+//                                  Log.d(Constant.TAG," CONSTANT DATA"+ Constantlist)
+//
+//
+//                                Handler(Looper.getMainLooper()).postDelayed({
+//
+//                                    startActivity(
+//                                        Intent(
+//                                            context!!.applicationContext,
+//                                            PopUpAfterCallEndActivity::class.java
+//                                        )
+//                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                            .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//
+//
+//                                    )
+//
+//                                },700)
+//
+//                            }else{
+//                                Log.d(Constant.TAG," NO DATA FOUND"+ Constantlist)
+//                            }
+//
 //
 //
 //                        }
+                        //endregion
+
 
                         Handler(Looper.getMainLooper()).postDelayed({
 

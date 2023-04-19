@@ -34,8 +34,10 @@ class SettingFragment : BaseFragment() {
     private lateinit var  prefernce : SharePrefernce
     private var constantEntity: ConstantEntity? = null
 
-
+    // saveSmSActivation
     private var switchListener : CompoundButton.OnCheckedChangeListener? = null
+    private var switchSMSListener : CompoundButton.OnCheckedChangeListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,9 +97,13 @@ class SettingFragment : BaseFragment() {
 
     fun setListener(){
 
-        binding.swPopup.setOnCheckedChangeListener (null);
-        binding.swPopup.setChecked (prefernce.isOverlayPopup());
-        binding.swPopup.setOnCheckedChangeListener (switchListener);
+        binding.swPopup.setOnCheckedChangeListener (null)
+        binding.swPopup.setChecked (prefernce.isOverlayPopup())
+        binding.swPopup.setOnCheckedChangeListener (switchListener)
+
+        binding.swSms.setOnCheckedChangeListener (null)
+        binding.swSms.setChecked (prefernce.isSmsACTIVE())
+        binding.swSms.setOnCheckedChangeListener (switchListener)
     }
 
     private fun getSwitchListener(){
@@ -105,6 +111,7 @@ class SettingFragment : BaseFragment() {
         switchListener = object : OnCheckedChangeListener{
 
         override fun onCheckedChanged(viewButton: CompoundButton?, isChecked: Boolean) {
+
                 if(isChecked){
 
                    // viewModel.saveOverlayStatus(true)
@@ -120,27 +127,25 @@ class SettingFragment : BaseFragment() {
 
             }
 
+        }
+
+
+        switchSMSListener = object  : OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, isChecked: Boolean) {
+                if(isChecked){
+
+                    prefernce.saveSmSActivation(true)
+
+                }else{
+                    prefernce.saveSmSActivation(false)
+                }
+            }
+
 
         }
 
     }
 
-    private fun observe(){
-
-//        viewModel.constantData.observe(viewLifecycleOwner){ constantEntity ->
-//
-//            constantEntity?.let {
-//
-//                this.constantEntity = it.get(0)
-//                Log.d(Constant.TAG,"" +it[0].FBAId +"\n Car "+ it[0].FourWheelerUrl
-//                        + " \n Health" + it[0].healthurl
-//                        + " \n Bike" + it[0].TwoWheelerUrl
-//                )
-//            }
-//
-//
-//        }
-    }
 
 
     companion object {

@@ -1,0 +1,614 @@
+[
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_dialog_loading.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/dialog_loading.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_custom_curve_darkcolor.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/custom_curve_darkcolor.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-debug-58:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_car_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_car_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xhdpi_ic_launcher_rounded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xhdpi/ic_launcher_rounded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_call_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_call_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_marko_one.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/marko_one.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_settings.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_doc_notuploaded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/doc_notuploaded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_edittext_normal.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/edittext_normal.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_layout_animation.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/layout_animation.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_toggle.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/toggle.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxhdpi_ic_launcher.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_overlay_popup_permission.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_overlay_popup_permission.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/navigation_nav_graph.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_lightblue_rect.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_lightblue_rect.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxhdpi_ic_policyboss.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxhdpi/ic_policyboss.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/menu_bottom_menu.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/menu/bottom_menu.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_arrow_drop_up_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_arrow_drop_up_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_overlay_ring.jpeg.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/overlay_ring.jpeg"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_blue_border_lightblue_background.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/blue_border_lightblue_background.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_caller.jpeg.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/caller.jpeg"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/menu_menu_main.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/menu/menu_main.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_slide_up_in_rev.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/slide_up_in_rev.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-hdpi_ic_launcher_rounded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-hdpi/ic_launcher_rounded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_splash_screen.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_splash_screen.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_home.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/navigation_nav_graph2.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/navigation/nav_graph2.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_circular_checklayer.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/circular_checklayer.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_lightgreen_topoval.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_lightgreen_topoval.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-mdpi_ic_launcher_rounded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-mdpi/ic_launcher_rounded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_splash_bg.webp.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/splash_bg.webp"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_round_corner_toggle.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/round_corner_toggle.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_setting.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_setting.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xhdpi_ic_policyboss.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xhdpi/ic_policyboss.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_inter_regular.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/inter_regular.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_log_out.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_log_out.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_home.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_custom_edit_text_cursor.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/custom_edit_text_cursor.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_email_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_email_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_slide_in.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/slide_in.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_pop_up_after_call_end.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_pop_up_after_call_end.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_progressdialog_loading.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/progressdialog_loading.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-mdpi_ic_policyboss.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-mdpi/ic_policyboss.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_lslide.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/lslide.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_custom_curve_blue.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/custom_curve_blue.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_poppinsmedium.otf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/poppinsmedium.otf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_green.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_green.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/xml_data_extraction_rules.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_first2.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_first2.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_custom_switch.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/custom_switch.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_common_web_view.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_common_web_view.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_fall_down.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/fall_down.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_circular_greenbg.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/circular_greenbg.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_priority_high_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_priority_high_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_gradient_background.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/gradient_background.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_ibmplexsansmedium.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/ibmplexsansmedium.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_bottom_currve.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_bottom_currve.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_login.jpg.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/login.jpg"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_round_rect_blue_shape.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/round_rect_blue_shape.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_pop_up_after_call_end_old.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_pop_up_after_call_end_old.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_poppinsregular.otf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/poppinsregular.otf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_doc_uploaded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/doc_uploaded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_close_black_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_close_black_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_yellow.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_yellow.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_close_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_close_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic__close_white_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic__close_white_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-mdpi_ic_launcher.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_switch_track_selector.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/switch_track_selector.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_login.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_poppinsbold.otf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/poppinsbold.otf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_lightgreen_rect.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_lightgreen_rect.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_muli.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/muli.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_overlay_permission.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_overlay_permission.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_tick.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/tick.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_check_gif.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/check_gif.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_content_main.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/content_main.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_circularbg.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/circularbg.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_toggle_swipe.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/toggle_swipe.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_darktblue_rect.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_darktblue_rect.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_edittext_focused.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/edittext_focused.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_content_login.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/content_login.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-hdpi_ic_policyboss.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-hdpi/ic_policyboss.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_check_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_check_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_edittext.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/edittext.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-hdpi_ic_launcher.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_notifications.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_notifications.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_bottom_white_currve.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_bottom_white_currve.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxxhdpi_ic_launcher_rounded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxxhdpi/ic_launcher_rounded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_archivo_black.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/archivo_black.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_pb_splash_bg.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/pb_splash_bg.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_bike_24.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_bike_24.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_info_ic.webp.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/info_ic.webp"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_slide_up_out.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/slide_up_out.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/navigation_nav_bottom_graph.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/navigation/nav_bottom_graph.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/xml_backup_rules.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_rotate_in.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/rotate_in.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_dine_movie.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/dine_movie.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_primary_rect.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_primary_rect.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_no_internet.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_no_internet.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_test.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_test.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_circular_exclaimlayer.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/circular_exclaimlayer.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_document_menu.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/document_menu.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_correct_tick.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_correct_tick.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_user1.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/user1.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_disclosure1.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/disclosure1.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_main.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_inter_bold.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/inter_bold.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_base.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_base.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_slide_up_out_rev.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/slide_up_out_rev.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_second2.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_second2.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_base.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_base.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_correct_tick_green.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_correct_tick_green.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_popup_window.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/popup_window.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_background.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/background.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_capsule_shape.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/capsule_shape.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_backgroun.webp.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/backgroun.webp"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxxhdpi_ic_policyboss.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxxhdpi/ic_policyboss.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_setting.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_setting.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_slide_up_in.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/slide_up_in.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_custom_background.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/custom_background.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_lightblue_border.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/lightblue_border.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_scale_up.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/scale_up.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_fragment_contact.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/fragment_contact.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_bungee.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/bungee.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_click_on.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/click_on.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_ibmplexsansregular.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/ibmplexsansregular.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_content_test.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/content_test.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_round_rect_shape_multi.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/round_rect_shape_multi.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_two_wheeler.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/two_wheeler.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_lightgreywhite_border.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/lightgreywhite_border.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-pngs-52:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/font_inter_semibold.ttf.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/font/inter_semibold.ttf"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xhdpi_ic_launcher.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_share_icon_white.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/share_icon_white.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_background1.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/background1.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable-xxhdpi_ic_launcher_rounded.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable-xxhdpi/ic_launcher_rounded.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bird.gif.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bird.gif"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_switch_track_off.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/switch_track_off.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/anim_rslide.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/anim/rslide.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_switch_track_on.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/switch_track_on.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_ic_person.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/layout_activity_home.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/layout/activity_home.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_round_rect_shape.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/round_rect_shape.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_health_insurance.png.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/health_insurance.png"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_bg_lightblue_topoval.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/bg_lightblue_topoval.xml"
+    },
+    {
+        "merged": "com.policyboss.policybosscaller.app-merged_res-57:/drawable_custom_curve_white.xml.flat",
+        "source": "com.policyboss.policybosscaller.app-main-59:/drawable/custom_curve_white.xml"
+    }
+]

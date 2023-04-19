@@ -100,7 +100,6 @@ class HomeFragment : BaseFragment() {
 
         SharePrefernce(requireContext()).saveOpenBootTime(0)
 
-
     }
 
     fun setListener(){
@@ -165,6 +164,7 @@ class HomeFragment : BaseFragment() {
             }
             "N" -> {
                 dialog.dismiss()
+
             }
         }
     }
@@ -189,6 +189,7 @@ class HomeFragment : BaseFragment() {
 
 
     private fun getUserConstantData(){
+
 
         viewLifecycleOwner.lifecycleScope.launch {
 

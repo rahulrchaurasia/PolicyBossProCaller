@@ -21,9 +21,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : ViewModel(){
 
 
-     var _constantData = MutableLiveData<List<ConstantEntity>>()
+    val _constantData = MutableLiveData<ConstantEntity?>()
 
-    val constantData : LiveData<List<ConstantEntity>>
+    val constantData : LiveData<ConstantEntity?>
         get() = _constantData
 
 
@@ -35,19 +35,8 @@ class HomeViewModel(var context: Context, var homeRepository: HomeRepository) : 
 
 
 
-    init {
 
-       // constantLiveData.postValue(homeRepository.userConstantEntity)
-        viewModelScope.launch{
-            homeRepository.getUserConstantList().collect{ item ->
-
-                _constantData.postValue(item)
-
-            }
-        }
-
-    }
-
+    fun getUserConstant() =  homeRepository.getUserConstantList()
 
 
 

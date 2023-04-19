@@ -13,6 +13,7 @@ import android.os.Environment
 import android.os.PowerManager
 import android.provider.MediaStore
 import android.provider.Settings
+import android.telephony.SmsManager
 import android.util.Base64
 import android.util.Base64.encodeToString
 import android.util.Log
@@ -427,6 +428,8 @@ object Utility {
 
     }
 
+
+
    open  fun bitmapToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream)
@@ -450,6 +453,28 @@ object Utility {
             browserIntent.data = Uri.parse(url)
         }
         context.startActivity(browserIntent)
+    }
+
+
+    open fun smsHandling(){
+        val phoneNumber = "9224624999" // replace with the phone number you want to send the SMS to
+
+        val message = "Hello, this is a test message!"
+
+//        val smsManager: SmsManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            applicationContext.getSystemService(SmsManager::class.java)
+//        } else {
+//            SmsManager.getDefault()
+//        }
+        try {
+            val smsManager: SmsManager = SmsManager.getDefault() as SmsManager
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+
+
+        } catch (e: Exception) {
+
+            e.printStackTrace()
+        }
     }
 
     /****************************************************************

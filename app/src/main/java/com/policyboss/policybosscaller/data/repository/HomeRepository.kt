@@ -55,7 +55,7 @@ class HomeRepository (
     }.flowOn(Dispatchers.IO)
 
 
-    fun getUserConstantList() :Flow<List<ConstantEntity>>{
+    fun getUserConstantList() : List<ConstantEntity>{
 
         return demoDatabase.constantDao().getConstantData()
     }

@@ -62,7 +62,7 @@
                         android:layout_height="42dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="@dimen/twelve"
-                        android:src="@drawable/ic_policyboss"
+                        android:src="@drawable/ic_launcher_rounded"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

@@ -6,15 +6,21 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.WindowManager
+import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.policybosscaller.Prefrence.SharePrefernce
 import com.example.policybosscaller.Utility.Constant
 import com.example.policybosscaller.Utility.Utility
@@ -52,19 +58,29 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
 
         sharePreferences = SharePrefernce(this@PopUpAfterCallEndActivity)
-        init()
+         init()
+         setListener()
+         bindData()
+
+       // sharePreferences.clear()
+        sharePreferences.clearLastState()    // Cleae the last State of the Call receiver...
+
+        observe()
+
+       if(sharePreferences.isSmsACTIVE()) {
+           Utility.smsHandling()
+       }
+
+
+    }
+
+    fun setListener(){
         binding.lyParent.setOnClickListener(this)
         binding.lyPrivateCar.setOnClickListener(this)
         binding.lyTwoWheeler.setOnClickListener(this)
         binding.lyHealth.setOnClickListener(this)
-
-         bindData()
-
-        sharePreferences.clear()
-
-        observe()
+        binding.btnLink.setOnClickListener(this)
     }
-
 
     fun getClassName() : String{
 
@@ -90,19 +106,17 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
 
         viewModel.constantData.observe(this@PopUpAfterCallEndActivity) { constantEntity ->
 
-            constantEntity?.let {
+            Toast.makeText(this,"wdwdwwwd",Toast.LENGTH_LONG).show()
+            if(constantEntity != null){
 
-                this.constantEntity = it.get(0)
-//                Log.d(Constant.TAG, "" + it[0].FBAId + "\n Car " + it[0].FourWheelerUrl
-//                            + " \n Health" + it[0].healthurl
-//                            + " \n Bike" + it[0].TwoWheelerUrl
-//                )
+                constantEntity?.let {
+                    this.constantEntity = it
+
+                }
 
             }
 
-
         }
-
 
 
     }
@@ -138,6 +152,11 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
                 this@PopUpAfterCallEndActivity.finish()
             }
 
+            binding.btnLink.id -> {
+
+                val url = "https://origin-cdnh.policyboss.com/fmweb/motor/life_sanchay/POS_Product.html?ss_id=11436&hdfc_quote=00952048&fba_id=58403&v=20200717&sub_fba_id=0&ip_address=&mac_address=&app_version=policyboss-0.1.2&device_id=e73cb6c8dd4be83c&product_id=3&login_ssid="
+               Utility.loadWebViewUrlInBrowser(context = this@PopUpAfterCallEndActivity,url = url)
+            }
 
 
 
@@ -159,6 +178,37 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
        // binding.txtMob.text = "${sharePreferences.getCallType()}: ${ sharePreferences.getPhoneNumber().takeLast(10)}"
         binding.txtMob.text = strTemp.toString()
 
+        binding.imglogo.load("https://origin-cdnh.policyboss.com/fmweb/policyboss-pro/DynamicMenuImages/hdfc_life.png") {
+            crossfade(true)
+            placeholder(R.drawable.round_rect_shape)
+            transformations(CircleCropTransformation())
+        }
+
+        binding.webview.webViewClient = WebViewClient()
+
+        // this will load the url of the website
+        //"https://www.policyboss.com"
+        binding.webview.loadUrl("https://www.youtube.com/watch?v=_LqI-x9oD-g")
+
+        // this will enable the javascript settings, it can also allow xss vulnerabilities
+        binding.webview.settings.javaScriptEnabled = true
+
+        // if you want to enable zoom feature
+        binding.webview.settings.setSupportZoom(true)
+
+
+
+        val mSpannableString = SpannableString("LINK")
+
+        // Setting underline style from
+        // position 0 till length of
+        // the spannable string
+        mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
+
+        // Displaying this spannable
+        // string in TextView
+        binding.btnLink.text = mSpannableString
+
 
     }
 
@@ -178,52 +228,65 @@ class PopUpAfterCallEndActivity : AppCompatActivity() , OnClickListener {
     }
     fun OpenWebView(type: String){
 
-        var url = ""
-        var name = ""
-        when(type){
+        if(constantEntity != null) {
 
-            Constant.PrivateCar ->{
+            var url = ""
+            var name = ""
+            when (type) {
+
+                Constant.PrivateCar -> {
 
 
-                name = "MOTOR INSURANCE"
-                constantEntity?.let {
-                    url =  Utility.getURL(url = it.FourWheelerUrl, parent_ssid = "", type = Product.car)
+                    name = "MOTOR INSURANCE"
+                    constantEntity?.let {
+                        url = Utility.getURL(
+                            url = it.FourWheelerUrl,
+                            parent_ssid = "",
+                            type = Product.car
+                        )
 
-                }
-
-            }
-            Constant.TwoWheeler ->{
-
-                //url = Constant.TwoWheelerUrl
-                name = "TWO WHEELER INSURANCE"
-                constantEntity?.let {
-                    url =    Utility.getURL(url = it.TwoWheelerUrl, parent_ssid = "", type = Product.car)
+                    }
 
                 }
-            }
-            Constant.Health ->{
+                Constant.TwoWheeler -> {
 
-                //url = Constant.HealthUrl
-                name = "HEALTH INSURANCE"
-                constantEntity?.let {
-                    url =    Utility.getURL(url = it.healthurl, parent_ssid = "", type = Product.car)
+                    //url = Constant.TwoWheelerUrl
+                    name = "TWO WHEELER INSURANCE"
+                    constantEntity?.let {
+                        url = Utility.getURL(
+                            url = it.TwoWheelerUrl,
+                            parent_ssid = "",
+                            type = Product.car
+                        )
 
+                    }
+                }
+                Constant.Health -> {
+
+                    //url = Constant.HealthUrl
+                    name = "HEALTH INSURANCE"
+                    constantEntity?.let {
+                        url =
+                            Utility.getURL(url = it.healthurl, parent_ssid = "", type = Product.car)
+
+                    }
                 }
             }
-        }
 
-        if(!url.isEmpty()){
+            if (!url.isEmpty()) {
 
-            val dialogIntent = Intent(this@PopUpAfterCallEndActivity, CommonWebViewActivity::class.java)
-                .putExtra("URL", url)
-                .putExtra("NAME", name)
-                .putExtra("TITLE", name);
-            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                val dialogIntent =
+                    Intent(this@PopUpAfterCallEndActivity, CommonWebViewActivity::class.java)
+                        .putExtra("URL", url)
+                        .putExtra("NAME", name)
+                        .putExtra("TITLE", name);
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
-            startActivity(dialogIntent)
+                startActivity(dialogIntent)
 
+            }
         }
 
     }
